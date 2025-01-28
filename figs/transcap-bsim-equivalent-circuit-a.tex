@@ -1,0 +1,91 @@
+\newcommand{\TranscapBsimEquivalentCircuitA}
+{
+ \coordinate (gate) at (0,0);
+
+  \draw (gate) to [short,o-*] ++ (2,0) coordinate (cgsp)
+               to [C,l=$C_{\mathrm{GS,i}}$ ] ++ (0,-2)  coordinate (cgsn)
+               to [short,*-o] (cgsn-|gate) coordinate (source1);
+
+  \coordinate (cgbp) at ($(gate)!0.5!(cgsp)$);
+
+  \draw (cgbp) to [short,*-] (cgbp|-source1)
+               to [ C
+                  , l=$C_{\mathrm{GB,i}}$
+                  , -*
+                  ] ++ (0,-2) coordinate (cgbn)
+               to [short,-o] (cgbn-|source1) coordinate (bulk1);
+
+  \draw (cgsp) to [ C
+                  , l=$C_{\mathrm{GD,i}}$
+                  ] ++ (2,0) coordinate (gmp)
+               to [ american controlled current source
+                  , name=gm
+                  , l=$g_{\mathrm{m}} \cdot \underline{V}_{\mathrm{GS,i}}$
+                  ] ++ (0,-2) coordinate (gmn)
+                  to [short,-] (gmn-|cgsn);
+
+  \draw (gmp) to [short,*-] ++ (2.2,0) coordinate (gdsp)
+              to [ R
+                 , l=$g_{{\scriptscriptstyle \mathrm{DS}}}$
+                 ] (gdsp|-gmn) coordinate (gdsn)
+              to [short,-*] (gmn);
+
+  \draw (gdsn) ++ (0.0,0) coordinate (cmxp)
+               to [ american controlled current source
+                  , name=CCC
+                  , l=$s \ C_{\mathrm{mx,i}} \ 
+                       \underline{V}_{\mathrm{GB}}$
+                  , *-*
+                  ] (cmxp|-bulk1) coordinate (cmxn);
+
+  \draw (gdsp) to [short,*-] ++ (1.25,0) coordinate (cdsp)
+               to [ C
+                  , l=$C_{\mathrm{DS,i}}$
+                  ] (cdsp|-gdsn) coordinate (cdsn)
+               to [short,-*] (gdsn);
+
+  \draw (cdsn) to [short,*-] ++ (1.5,0) coordinate (cmbn)
+               to [ american controlled current source
+                  , l_=$s \ C_{\mathrm{mb,i}} \ 
+                        \underline{V}_{\mathrm{BS}}$
+                  ] (cmbn|-cdsp) coordinate (cmbp)
+               to [short,-*] (cdsp);
+
+  \draw (cmbn) to [short,*-] ++ (2.7,0) coordinate (cmn)
+               to [ american controlled current source
+                  , l_=$s \ C_{\mathrm{m,i}} \ 
+                        \underline{V}_{\mathrm{GS,i}}$
+                  ] (cmn|-cdsp) coordinate (cmp)
+               to [short,-*] (cmbp);
+
+  \draw (cmp) to [short,*-*] ++ (2.4,0) coordinate (cdbp)
+              to [short,-] (source1-|cdbp)
+              to [C,l=$C_{\mathrm{DB,i}}$,-*] (bulk1-|cdbp) coordinate (cdbn);
+
+  \draw (cmbn) to [C,l=$C_{\mathrm{SB,i}}$,-*] (cmbn|-bulk1);
+
+  \draw (cdbp) to [short,*-o] ++ (1.5,0) coordinate (drain);
+  \draw (cmn)  to [short,*-o] (cmn-|drain) coordinate (source2);
+
+  \draw (cgbn) to [short,-o] (bulk1-|source2) coordinate (bulk2);
+
+  \node[anchor=east] at (gate) {$G$};                
+  \node[anchor=east] at (source1) {$S'$}; 
+  \node[anchor=west] at (source2) {$S'$}; 
+  \node[anchor=west] at (drain) {$D'$};
+  \node[anchor=east] at (bulk1) {$B$}; 
+  \node[anchor=west] at (bulk2) {$B$}; 
+
+  \path [voltarrow] (gate) edge[] 
+    node[midway,left,font=\footnotesize,inner sep=1pt] 
+    {$\underline{V}_{\mathrm{GS}}$} (source1);
+  \path [voltarrow] (bulk1) edge[] 
+    node[midway,left,font=\footnotesize,inner sep=1pt] 
+    {$\underline{V}_{\mathrm{BS}}$} (source1);
+  \path [voltarrow] (bulk2) edge[] 
+    node[midway,right,font=\footnotesize,inner sep=1pt] 
+    {$\underline{V}_{\mathrm{BS}}$} (source2);
+  \path [voltarrow] (drain) edge[] 
+    node[midway,right,font=\footnotesize,inner sep=1pt] 
+    {$\underline{V}_{\mathrm{DS}}$} (source2);
+}

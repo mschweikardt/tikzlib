@@ -1,0 +1,57 @@
+\newcommand{\EkvIcVsVgseff}
+{
+\begin{axis}[ xlabel=$\frac{V_{\mathrm{GS}} - V_{\mathrm{TH}}}{n}$
+            , ylabel=$\mathrm{IC}$
+            , ymode=log
+            , xmin=-10
+            , xmax=10
+            , ymin=0.001
+            , ymax=100
+            , clip=true
+            , grid=both
+            , width= 12cm
+            ]
+  \draw[dashed] (axis cs:-10,0.1) -- (axis cs:10,0.1);
+  \draw[dashed] (axis cs:-10,10) -- (axis cs:10,10);
+
+  \addplot[ mark=none
+          , domain=0.5:10
+          , samples=100
+          , smooth
+          , gray
+          , thick] {(x/2)^2}; 
+
+  \addplot[ mark=none
+          , domain=-10:-0.5
+          , samples=100
+          , smooth
+          , gray
+          , thick] {e^x};  
+
+  \addplot[ mark=none
+          , thick
+          , domain=-10:10
+          , samples=300
+          , smooth
+          , thick] {(ln(e^(0.5*x)+1))^2}; 
+
+  \node[rotate=90,fill=white,font=\scriptsize] 
+    at (axis cs:-9,1) {moderate (MI)};
+  \node[rotate=90,fill=white,font=\scriptsize] 
+    at (axis cs:-9,1e-2) {weak (WI)};
+  \node[rotate=90,fill=white,font=\scriptsize] 
+    at (axis cs:-9,3e1) {strong (SI)};
+
+  \draw[{Latex[round,scale=0.9]}-]
+    (axis cs:1,1) -- (axis cs:0,3) 
+    node[anchor=south,fill=white] {$\mathrm{IC}$};
+
+  \draw[{Latex[round,scale=0.9]}-]
+    (axis cs:0.9,2e-1) -- (axis cs:4,5e-1) 
+    node[anchor=west,fill=white] {$\mathrm{IC}_{\mathrm{quad}}$};
+
+  \draw[{Latex[round,scale=0.9]}-]
+    (axis cs:-1.5,2.2e-1) -- (axis cs:-3.5,5e-1) 
+    node[anchor=east,fill=white] {$\mathrm{IC}_{\mathrm{exp}}$};
+\end{axis}
+}
