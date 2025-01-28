@@ -1,3 +1,8 @@
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usetikzlibrary{arrows.meta}
+
 \usepackage{circuitikz}
 
 \ctikzset{bipoles/resistor/width=0.5}
@@ -11,3 +16,14 @@
 \ctikzset{bipoles/cisourceam/width=0.5}
 
 \tikzstyle{voltarrow}=[-{Latex[round]},semithick,shorten <=3pt,shorten >=3pt]
+
+\usepackage{amsmath}
+
+\usepackage{smartdiagram}
+
+\smartdiagramset{ uniform color list=white for 4 items
+                , sequence item border color=black
+                , sequence item border size=0.5pt
+                , sequence item text color=black
+                , font=\footnotesize
+                }
