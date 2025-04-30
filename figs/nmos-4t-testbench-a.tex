@@ -1,0 +1,34 @@
+\newcommand{\NmosFourtTestbenchA}
+{
+  \node[nfet](mos) at (0,0) {};
+
+  \draw (mos.bulk) to[short,-o] ++ (0.95,0) coordinate(vbsminus)
+                   to[short,-]  ++ (0.6,0) coordinate(bulk) to [V]  ++ (0,-2) 
+         to [short,-o]  ++ (-0.6,0) coordinate (vbsplus) 
+         to[short,-*] (vbsplus-|mos.source) coordinate (gnd) -- (mos.source);
+
+   \draw (mos.gate) to[short,-o] ++ (-0.45,0) coordinate(vgsplus)
+           --++ (-0.6,0) to [V]  ++ (0,-2) to[short,-o] 
+           ++ (0.6,0) coordinate(vgsminus)  -- (gnd-|mos.source);    
+
+   \draw (mos.drain) to[short,-]  ++ (0,0.5) coordinate(drainedge)
+          to[short,i<=$I_{\mathrm{D}}$,-o]  ++ (3,0) coordinate(vdsplus) to[short,-] 
+          ++ (0.6,0) coordinate (vdd) to[V] (vdd|-gnd) to[short,-o] 
+           ++(-0.6,0) coordinate(vdsminus) to[short,-*] (gnd-|bulk);
+
+  \path [voltarrow](vbsplus) 
+    edge[] node [midway,left,inner sep=1pt] {$V_{\mathrm{SB}}$} (vbsminus);
+  \path [voltarrow](vgsplus) 
+    edge[] node [midway,right,inner sep=1pt] {$V_{\mathrm{GS}}$} (vgsminus);
+  \path [voltarrow](vdsplus)
+    edge[] node [midway,left,inner sep=1pt] {$V_{\mathrm{DS}}$} (vdsminus);
+
+  \tikzstyle{termstyle}=[font=\scriptsize\ttfamily,inner sep=1pt]
+
+  \node[anchor=south,termstyle] () at (mos.gate) {G};
+  \node[anchor=west ,termstyle] () at ($(mos.drain)!0.4!(mos.bulk)$) {D};
+  \node[anchor=south,termstyle] () at ($(mos.bulk)+(0.4,0)$) {B};
+  \node[anchor=west ,termstyle] () at ($(mos.source)!0.4!(mos.bulk)$) {S};
+
+  \node[ground] () at (gnd-|mos.source) {};
+}
