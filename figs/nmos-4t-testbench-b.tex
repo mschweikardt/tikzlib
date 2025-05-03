@@ -1,0 +1,27 @@
+\newcommand{\NmosFourtTestbenchB}
+{
+    \node[nfet](mos) at (0,0) {};
+
+    \draw (mos.source) to [V,i<=$i_{\mathrm{S}}(t)$,v=$v_{\mathrm{S}}(t)$] ++ (0,-2.5)coordinate (gnd);
+    \draw (mos.bulk)   to [short,-] ++ (2.5,0) coordinate (x)
+                       to [short,-] (x|-mos.source) coordinate (x)
+                       to [V,i<=$i_{\mathrm{B}}(t)$,v=$v_{\mathrm{B}}(t)$] (gnd-|x) coordinate (bulkgnd)
+                       to [short,-*] (gnd);
+    \draw (mos.gate)   to [short,-] ++ (-1.5,0) coordinate (x)
+                       to [V,i<=$i_{\mathrm{G}}(t)$,v=$v_{\mathrm{G}}(t)$] (gnd-|x) coordinate (gategnd)
+                       to [short,-] (gnd);
+    \draw (mos.drain)  to [short,-] ++ (0,0.5) coordinate (x)
+                       to [short,-] (x-|bulkgnd)
+                       to [short,-] ++ (2,0) coordinate (x)
+                       to [V,i<=$i_{\mathrm{D}}(t)$,v=$v_{\mathrm{D}}(t)$] (gnd-|x)
+                       to [short,-*] (bulkgnd);
+
+    \node[ground] () at (gnd) {}; 
+
+    \tikzstyle{termstyle}=[font=\scriptsize\ttfamily,inner sep=1pt]
+
+    \node[anchor=south,termstyle] () at (mos.gate) {G};
+    \node[anchor=west ,termstyle] () at ($(mos.drain)!0.4!(mos.bulk)$) {D};
+    \node[anchor=south,termstyle] () at ($(mos.bulk)+(0.4,0)$) {B};
+    \node[anchor=west ,termstyle] () at ($(mos.source)!0.4!(mos.bulk)$) {S};
+}
