@@ -1,0 +1,68 @@
+\newcommand{\StabilityTwoPoleOneZeroSchematicA}
+{
+    \newcommand\height{2.2}
+    \newcommand\dista{1.2}
+
+    \draw (0, \height/2) coordinate (vip) to [short,o-] ++ (0.5,0);
+    \draw (0,-\height/2) coordinate (vin) to [short,o-] ++ (0.5,0);
+
+    \path [voltarrow] (vip) edge node [midway,left,inner sep=2pt] 
+      {$\underline{V}_{\mathrm{I}}$} (vin);
+
+    \draw (3.25,\height/2)      coordinate (r1p)
+      to [short,-] ++ (-2.25,0) coordinate (gm1p)
+      to [ american controlled current source
+         , name=gm1
+         , l=$g_{\mathrm{m1}} \cdot \underline{V}_{\mathrm{I}}$
+         ] ++ (0,-\height) coordinate (gm1n)
+      to [short,-] (gm1n-|r1p) coordinate (r1n)
+      to [ R
+         , name=r1
+         , l_=$R_{\mathrm{1}}$
+         , *-*
+         ] (r1p);
+
+    \draw (r1p) to [short,-*] ++ (\dista,0)  coordinate (c1p)
+                to [ C
+                   , name=c1
+                   , l=$C_{\mathrm{1}}$
+                   , *-*
+                   ] (c1p|-r1n) coordinate (c1n)
+                to [short,-] (r1n);
+
+    \draw (c1p) to [short,-o] ++ (\dista,0) coordinate (v1p);
+    \draw (c1n) to [short,-o]    (v1p|-c1n) coordinate (v1n);
+
+    \path [voltarrow] (v1p) edge node [midway,right,inner sep=2pt] 
+      {$\underline{V}_{\mathrm{X}}$} (v1n);
+
+    \draw (v1n) to [short,o-*] ++ (3.5,0) coordinate (gm2n)
+      to [ american controlled current source
+         , name=gm2
+         , invert
+         , l_=$g_{\mathrm{m2}} \cdot \underline{V}_{\mathrm{X}}$
+         ] ++ (0,\height) coordinate (gm2p)
+      to [short,-] ++ (2.25,0) coordinate (r2p)
+      to [ R
+         , name=r2
+         , l=$R_{\mathrm{2}}$
+         , *-*
+         ] (r2p|-gm2n) coordinate (r2n)
+      to [short,-] (gm2n);
+
+    \draw (r2p) to [short,-*] ++ (\dista,0)  coordinate (c2p)
+                to [ C
+                   , name=c2
+                   , l=$C_{\mathrm{2}}$
+                   , *-*
+                   ] (c2p|-r2n) coordinate (c2n)
+                to [short,-] (r2n);
+
+    \draw (c2p) to [short,-o] ++ (\dista,0)  coordinate (v2p);
+    \draw (c2n) to [short,-o] (v2p|-c2n)  coordinate (v2n);
+
+    \path [voltarrow] (v2p) edge node [midway,right,inner sep=2pt] 
+      {$\underline{V}_{\mathrm{O}}$} (v2n);
+
+    \draw (v1p) to [C,o-*, l=$C_{\mathrm{M}}$] (gm2p);
+}
