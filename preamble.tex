@@ -2,6 +2,8 @@
 \usepackage{pgfplots}
 \usepackage{siunitx}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.markings}
+
 
 \usepackage{nicefrac}
 
@@ -14,7 +16,6 @@
 \ctikzset{bipoles/americaninductor/width=0.6}
 \ctikzset{bipoles/americaninductor/height=0.2}
 \ctikzset{tripoles/mos style/arrows}
-
 \ctikzset{bipoles/cisourceam/height=0.5}
 \ctikzset{bipoles/cisourceam/width=0.5}
 
@@ -31,3 +32,19 @@
                 , sequence item text color=black
                 , font=\footnotesize
                 }
+
+% Source: https://tex.stackexchange.com/questions/52514/tikz-signal-flow-graphs-illustrating-masons-rule
+\newif\iflabrev
+\tikzset{label revd/.is if=labrev}
+\tikzset{terminal/.style 2 args={draw,circle,inner sep=2pt,label={#1:#2}}}
+\tikzset{amark/.style={
+          decoration={             
+                        markings,   
+                        mark=at position {0.5} with { 
+                            \arrow{Latex},
+                            \iflabrev \node[above] {#1};\else \node[below] {#1};\fi
+                        }
+            },
+            postaction={decorate}
+        }
+}

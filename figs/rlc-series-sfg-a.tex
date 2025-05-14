@@ -1,0 +1,15 @@
+\newcommand{\RlcSeriesSfgA}
+{
+  \node[terminal={below}{$v_{\mathrm{I}}(t)$}] (a) at (0,0) {};
+  \node[terminal={below left}{$\frac{\mathrm{d}i(t)}{\mathrm{d}t}$}] (b) at (3,0) {};
+  \node[terminal={below}{$i(t)$}] (c) at (6,0) {};
+  \node[terminal={below}{$\frac{\mathrm{d}v_{\mathrm{O}}(t)}{\mathrm{d}t}$}] (d) at (9,0) {};
+  \node[terminal={below}{$v_{\mathrm{O}}(t)$}] (e) at (12,0) {};
+
+  \draw[amark=$\nicefrac{1}{L}$] (a) to (b);
+  \draw[amark=$s^{-1}$] (b) to (c);
+  \draw[amark=$\nicefrac{1}{C}$] (c) to (d);
+  \draw[amark=$s^{-1}$] (d) to (e);
+  \draw[amark=$-\nicefrac{1}{L}$] (e) to[bend right=30] (b);
+  \draw[amark=$-\nicefrac{R}{L}$] (c) to[bend  left=45] (b);
+}
