@@ -1,0 +1,24 @@
+\newcommand{\FeedbackSystemA}
+{
+  \node[circle,draw=black,scale=0.6] (sum) at (1.5,0) {};
+  \node[anchor=east] at (0,0) {\underline{X}(s)};
+  \draw[-{Latex[round]},thick] (0,0) -- (sum.west);
+  \node[anchor=south east, font=\footnotesize] at (sum.west) {+};
+
+  \draw[thick] (3,0.7) -- (4.5,0) -- (3,-0.7) -- cycle;
+  \node[] at (3.5,0) {\underline{A}(s)};
+  \draw[-{Latex[round]},thick] (sum.east) -- (3,0);
+  \node[anchor=south,inner sep=2pt] at (2.25,0) {$\underline{Z}(s)$};
+
+  \draw[thick] (4.5,-1.6) -- (3,-2.3) -- (4.5,-3) -- cycle;
+  \node[] at (4,-2.3) {$\underline{\beta}(s)$};
+  \draw[-{Latex[round]},thick] (3,-2.3) -- (1.5,-2.3) -- (sum.south);
+      \node[anchor=south,inner sep=2pt] at (2.25,-2.3) {$\underline{V}(s)$};
+  \node[anchor=north west, font=\footnotesize] at (sum.south) {-};
+
+  \draw[-{Latex[round]},thick] (4.5,0) -- (6.5,0);
+  \node[anchor=west] at (6.5,0) {\underline{Y}(s)};
+  \node[circle,draw=black,fill=black,scale=0.5] () at (5.5,0) {};
+
+  \draw[-{Latex[round]},thick] (5.5,0) -- (5.5,-2.3) -- (4.5,-2.3);
+}
