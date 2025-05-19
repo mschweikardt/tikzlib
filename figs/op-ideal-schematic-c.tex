@@ -1,0 +1,33 @@
+\newcommand{\OpIdealSchematicC}
+{
+    \newcommand\height{2.0}
+    \draw [] (0, \height/2)                       coordinate (vip) 
+       to [short,o-,i=$\underline{I}_{\mathrm{I}}$] ++ (1,0) coordinate (x)
+        to [short,-]                                ++ (0,-0.5);
+     \draw (1, 0) ellipse (0.3 and 0.5);
+   
+    \draw [] (0,-\height/2) coordinate (vin) to [short,o-] ++ (1,0) 
+            to [short,-]                                ++ (0,0.5);
+
+
+    \draw (3, \height/2) coordinate (vop)  
+         to [short,o-,i<_=$\underline{I}_{\mathrm{O}}$] ++ (-1,0)
+        to [short,-]                                ++ (0,-0.5);
+
+    \draw (3, -\height/2)  coordinate (von) 
+        to [short,o-*] ++ (-1,0) coordinate (gnd) 
+        to [short,-]   ++ (0,0.5);
+
+    \draw (2, -0.25) ellipse (0.25 and 0.25); 
+    \draw (2,  0.25) ellipse (0.25 and 0.25); 
+    \node[ground] at (gnd) {};
+
+    \path [voltarrow] (vip) edge node [midway,left,inner sep=2pt] 
+      {$\underline{V}_{\mathrm{I}}$} (vin);
+    \path [voltarrow] (vop) edge node [midway,right,inner sep=2pt] 
+      {$\underline{V}_{\mathrm{O}}$} (von);
+
+    \node[anchor=east] at (vip) {INP};
+    \node[anchor=east] at (vin) {INN};
+    \node[anchor=west] at (vop) {O};  
+}
