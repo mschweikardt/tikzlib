@@ -1,0 +1,64 @@
+\newcommand{\NmosFourtTestbenchC}
+{
+  \node[nfet](mos) at (0,0) {};
+
+
+  \draw (mos.source) to [short,-]  ++ (0,-0.1)   coordinate(vsplus)
+                     to [ V
+                        , i_=$i_{\mathrm{S}}(t)$
+                        ]          ++ (0,-2.5)   coordinate(gnd);
+
+  \node[ground] () at (gnd) {};
+
+  \draw (vsplus) to [short,*-o]  ++ (1,0) coordinate(vsplus);
+
+  \draw (mos.bulk) to [short,-]   (vsplus|-mos.bulk)
+                   to [short,-o]  ++ (2,0)        coordinate (vbplus)
+                   to [ short
+                      , i<=$i_{\mathrm{B}}(t)$
+                      ]           ++ (1,0)        coordinate (x)
+                   to [V]         (x|-gnd)
+                   to [short,-o]  (gnd-|vbplus)   coordinate (vbminus)
+                   to [short,-o]  (gnd-|vsplus)   coordinate (vsminus)
+                   to [short,-*]  (gnd);
+
+  \draw (mos.drain) to [short,-]   ++ (0,1)       coordinate (y)
+                    to [short,-]      (x|-y)
+                    to [short,-o]  ++ (1.4,0)     coordinate (vdplus)
+                    to [ short
+                       , i<=$i_{\mathrm{D}}(t)$
+                       ]           ++ (1,0)       coordinate (z)
+                    to [V]         (z|-gnd)
+                    to [short,-o]  (vdplus|-gnd)  coordinate (vdminus)
+                    to [short,-*]  (x|-gnd);
+
+  \draw (mos.gate) to [short,-o]   ++ (-1,0)      coordinate (vgplus)
+                   to [ short
+                      , i_<=$i_{\mathrm{G}}(t)$
+                      ]            ++ (-1,0)      coordinate (a)
+                   to [V]          (a|-gnd)
+                   to [short,-o]   (vgplus|-gnd)  coordinate (vgminus)
+                   to [short]      (gnd);
+
+  \tikzstyle{voltarrow}=[ -{Latex[round,scale=0.9]}
+                        , semithick
+                        , shorten <=3pt
+                        , shorten >=3pt
+                        ]
+
+  \path [voltarrow](vbplus) 
+    edge[] node [midway,left,inner sep=1pt] {$v_{\mathrm{B}}(t)$} (vbminus);
+  \path [voltarrow](vsplus) 
+    edge[] node [midway,right,inner sep=1pt] {$v_{\mathrm{S}}(t)$} (vsminus);
+  \path [voltarrow](vdplus) 
+    edge[] node [midway,left,inner sep=1pt] {$v_{\mathrm{D}}(t)$} (vdminus);    
+  \path [voltarrow](vgplus) 
+    edge[] node [midway,right,inner sep=1pt] {$v_{\mathrm{G}}(t)$} (vgminus);   
+
+  \tikzstyle{termstyle}=[font=\scriptsize\ttfamily,inner sep=1pt]
+
+  \node[anchor=south,termstyle] () at (mos.gate) {G};
+  \node[anchor=west ,termstyle] () at ($(mos.drain)!0.4!(mos.bulk)$) {D};
+  \node[anchor=south,termstyle] () at ($(mos.bulk)+(0.4,0)$) {B};
+  \node[anchor=west ,termstyle] () at ($(mos.source)!0.4!(mos.bulk)$) {S};
+}
