@@ -31,7 +31,7 @@ for texfile in *.tex; do
   file=${texfile%.*}
 
   pdflatex $texfile
-  inkscape --without-gui --pdf-poppler --file=$file.pdf --export-plain-svg=$file.svg
+  pdf2svg $file.pdf $file.svg
 
   cp $file.pdf ./../$file.pdf
   cp $file.svg ./../$file.svg
