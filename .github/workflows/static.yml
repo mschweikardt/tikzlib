@@ -26,6 +26,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/xu-cheng/texlive-full:latest
     needs: cleanup
     steps:
       - name: Checkout
@@ -33,7 +35,6 @@ jobs:
       - name: Install dependecies
         run: |
           sudo apt-get update
-          sudo apt-get install texlive-full 
           sudo apt-get install inkscape
       - name: Build figures
         run: |
@@ -50,7 +51,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload only SVG
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
