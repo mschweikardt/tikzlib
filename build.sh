@@ -31,13 +31,10 @@ for texfile in *.tex; do
   file=${texfile%.*}
 
   pdflatex $texfile
-  pdf2svg $file.pdf $file.svg
-
   cp $file.pdf ./../$file.pdf
-  cp $file.svg ./../$file.svg
 
   echo "      <dt><a href="${REPO}blob/main/figs/$texfile">$texfile</a></dt>" >> ./../index.html
-  echo "      <dd><img src = "$file.svg" alt="$file"/></dd>" >> ./../index.html
+  echo "      <dd><embed src= "$file.pdf" alt="$file"/></dd>" >> ./../index.html
 
 done
 
