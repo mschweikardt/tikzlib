@@ -1,0 +1,37 @@
+\newcommand{\MosfetEqCircC}
+{
+  \newcommand\height{2.0}
+
+  \draw (6.75, \height/2) coordinate (vdsp)  
+     to [short,o-] ++ (-2.00,0) coordinate (gmbp) 
+     to [short,*-] ++ (-1.25,0) coordinate (rop)  
+     to [short,*-] ++ (-2.00,0)
+     to [ american controlled current source
+        , l=$g_{\mathrm{m}}\underline{V}_{\mathrm{GS}}$
+        ] ++ (0,-\height) coordinate (gnd)
+     to [short,-*] (gnd-|rop) coordinate (ron)     
+     to [short,-*] (gnd-|gmbp) coordinate (gmbn)          
+     to [short,-o] (gnd-|vdsp) coordinate (vdsn);
+
+  \draw (rop) to [R,l=$g_{\mathrm{DS}}$]  (ron);
+
+  \draw (gmbp) to [ american controlled current source
+                  , l=$g_{\mathrm{mb}}\underline{V}_{\mathrm{BS}}$
+                  ]  (gmbn);
+  \draw [] (0,  \height/2) coordinate (vgsp)    to [short,o-]   ++ (0.5,0);
+  \draw [] (0, -\height/2) coordinate (vgsn)    to [short,o-*]  (gnd);  
+  \draw [] (0,  -3*\height/2) coordinate (vbsp) to [short,o-]   ++ (0.5,0);
+
+
+  \path [voltarrow] (vgsp) edge node [midway,left,inner sep=2pt] 
+      {$\underline{V}_{\mathrm{GS}}$} (vgsn);
+  \path [voltarrow] (vdsp) edge node [midway,right,inner sep=2pt] 
+    {$\underline{V}_{\mathrm{DS}}$} (vdsn);
+  \path [voltarrow] (vbsp) edge node [midway,left,inner sep=2pt] 
+      {$\underline{V}_{\mathrm{BS}}$} (vgsn);      
+  \node[anchor=east] at (vgsp) {G};
+  \node[anchor=east] at (vgsn) {S};
+  \node[anchor=east] at (vbsp) {B};
+  \node[anchor=west] at (vdsp) {D};
+  \node[anchor=west] at (vdsn) {S};
+}
