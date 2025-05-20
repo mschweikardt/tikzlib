@@ -32,10 +32,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install dependecies
-        run: |
-          sudo apt-get update
-          sudo apt-get install inkscape
       - name: Build figures
         run: |
           ./build.sh
