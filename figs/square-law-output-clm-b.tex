@@ -1,0 +1,61 @@
+\newcommand{\SquareLawOutputClmB}
+{
+  \useasboundingbox (-1,-0.5) rectangle (6.25,6);
+
+  \node[anchor=north] at (0,0) {0};
+  \draw[thin] (0,0) -- (0,-0.075);
+  \node[anchor=east] at (0,0.25) {0};
+  \draw[thin] (0,0.25) -- (-0.075,0.25);
+
+  \node[anchor=north] at (5.0,0) {$V_{\mathrm{DS,max}}$};
+  \draw[thin] (5.0,0) -- (5.0,-0.075);
+
+  \draw[{Latex[round,scale=1.2]}-{Latex[round,scale=1.2]},thick] 
+    (0,5.75) -- (0,0) -- (6,0);
+
+  \draw[thick] (0,0.25) -- (5,0.25);
+  \node[anchor=south east, font=\small, inner sep=1pt,xshift=5mm] 
+    at (2.5,0.25) {$V_{\mathrm{GS}}=V_{\mathrm{GS,1}}$};
+
+  \draw[thick] plot[smooth,domain=0:1.5] (\x, {0.25-0.288016529*\x^2+0.957024794*\x});
+  %\draw[thick,dotted] (1.5,1.0375) -- (5,1.0375);
+  \draw[thick] plot[smooth,domain=1.5:5] (\x, {0.2*0.7875/1.694*(\x-1.5)+1.0375)});
+  \node[anchor=south west, font=\small, inner sep=1pt,xshift=5mm,rotate=5] 
+    at (4.2,1.3) {$V_{\mathrm{GS}}=V_{\mathrm{GS,2}}$};
+
+  \draw[thick] plot[smooth,domain=0:2.2] (\x, {0.25-0.31079305*\x^2+1.453744711*\x});
+  %\draw[thick,dotted] (2.2,1.944) -- (5,1.944);
+  \draw[thick] plot[smooth,domain=2.2:5] (\x, {0.2*1.694/3.927875*(\x-2.2)+1.944)});
+  \node[anchor=south west, font=\small, inner sep=1pt,xshift=5mm,rotate=5] 
+    at (4.2,2.15) {$V_{\mathrm{GS}}=V_{\mathrm{GS,3}}$};
+
+  \draw[thick] plot[smooth,domain=0:3.35] (\x, {0.25-0.290298507*\x^2+2.144999997*\x});
+  %\draw[thick,dotted] (3.35,4.177875) -- (5,4.177875);
+  \draw[thick] plot[smooth,domain=3.35:5] (\x, {0.2*(\x-3.35)+4.177875)});
+
+  \node[anchor=south west, font=\small, inner sep=1pt,xshift=5mm,rotate=12] 
+    at (4.2,4.45) {$V_{\mathrm{GS}}=V_{\mathrm{GS,max}}$};
+
+\draw[{Latex[round,scale=0.6]}-] (3.35,1.99) --++ (-0.1,-0.3) 
+  node[ anchor=north
+      , font=\scriptsize
+      , inner sep=2pt
+      ] {$\Delta V$};
+\draw[{Latex[round,scale=0.6]}-] (4,2.05) -- (4.5,1.95) 
+  node[ anchor=west
+      , font=\scriptsize
+      , inner sep=2pt
+      ] {$\Delta I$};
+
+  \node[anchor=east] at (2,4) 
+    {$g_{\mathrm{DS}} = \frac{\Delta I}{\Delta V}$};
+
+  \draw[gray] (2.7, 1.99) -- (4, 1.99) -- (4, 2.1);
+  \filldraw (2.7, 1.99) circle (0.6pt);
+  \filldraw (4.0, 2.1) circle (0.6pt);
+
+  \draw[dashed] plot[smooth,domain=0:3.9] (\x, {0.7*0.5*\x^2+0.25});
+
+  \node[anchor=south] at (6,0) {$V_{\mathrm{DS}}$};
+  \node[anchor=east] at (0,5.75) {$I_{\mathrm{D}}$};
+}
