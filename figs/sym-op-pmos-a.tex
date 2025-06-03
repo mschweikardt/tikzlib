@@ -1,0 +1,131 @@
+\newcommand{\SymOpPmosA}
+{
+  \newcommand\diffpairdist{3}
+
+  \node [pmos,xscale=-1] (mpcm1r) at (0,0) {}; 
+  \draw (mpcm1r.gate) to [short,- ] (mpcm1r.gate|-mpcm1r.drain) 
+                      to [short,-*] (mpcm1r.drain) 
+                      to [short,-o,f=$I_{\mathrm{0}}$] ++ (0,-1)
+                      node [anchor=north] {B} coordinate(b) ;
+
+  \draw (mpcm1r.gate) to [short,*-] ++ (2.5,0) 
+                      node [pmos,anchor=gate] (mpcm1a) {};
+
+  \draw (mpcm1a.drain) to [short,-*,f=$I_{\mathrm{1}}$] (mpcm1a.drain|-b) coordinate (cm)
+                       to [short,-]  ++ (-\diffpairdist/2,0) 
+                       to [short,-]  ++ (0,-0.25) 
+                       node [pmos,anchor=source] (mpd1a) {};
+
+  \draw (mpd1a.gate) to [short,-o] ++ (-0.05,0) node[anchor=east] {INN};
+
+  \draw (cm) to [short,-]  ++ (\diffpairdist/2,0) coordinate (x)
+             to [short,-]  (x|-mpd1a.source)
+             node [pmos,anchor=source,xscale=-1] (mpd1b) {};
+
+  \draw (mpd1b.gate) to [short,-o] ++ (0.05,0) node[anchor=west] {INP};
+
+  \draw (mpd1b.drain) to [short,-,f=$I_{\mathrm{1,B}}$] ++ (0,-1.5) 
+                      node [nmos,anchor=drain,xscale=-1] (mncm2r) {};
+
+  \draw (mpd1a.drain) to [short,-,f=$I_{\mathrm{1,A}}$] (mpd1a.drain|-mncm2r.drain)
+                      to [short,-] (mpd1a.drain|-mncm2r.source)
+                      node [nmos,anchor=drain,xscale=-1] (mncm3r) {};   
+
+  \draw (mncm3r.drain) to [short,*-]  (mncm3r.drain-|mncm3r.gate)
+                       to [short,-*]  (mncm3r.gate)
+                       to [short,-]  (mncm3r.gate-|mncm2r.gate)
+                       to [short,-] ++ (1,0)
+                       node [nmos,anchor=gate] (mncm3a) {}; 
+
+  \draw (mncm3a.drain)  to [short,-]  (mncm3a.drain|-mpcm1a.drain)
+                        node [pmos,anchor=drain,xscale=-1] (mpcm4r) {};  
+
+  \draw (mpcm4r.drain) to [short,*-] (mpcm4r.drain-|mpcm4r.gate)
+                       to [short,-*] (mpcm4r.gate)
+                       to [short,-] ++ (0.75,0)
+                       node [pmos,anchor=gate] (mpcm4a) {};  
+
+  \draw (mpcm4a.drain) to [short,-] (mpcm4a.drain|-mncm2r.drain)
+                       node [nmos,anchor=drain] (mncm2a) {};
+
+  \draw (mncm2a.gate) to [short,-]  (mncm2r.gate)
+                      to [short,*-] (mncm2r.gate|-mncm2r.drain)
+                      to [short,-*] (mncm2r.drain);
+
+
+  \draw (mncm2a.source) to [short,-]  (mncm2a.source|-mncm3a.source)
+                        to [short,-*] (mncm3a.source)
+                        to [short,-] (mncm3r.source);
+
+  \draw (mncm2r.source)  to [short,-*] (mncm3r.source-|mncm2r.source);                 
+
+  \draw (mpcm4a.source) to [short,-*] (mpcm4r.source)
+                        to [short,-*] (mpcm1a.source)
+                        to [short,-] (mpcm1r.source);
+
+  \draw ($(mpcm1a.source)!0.5!(mpcm4r.source)$) 
+      to [short,*-] ++ (0,0.1) coordinate (gnd)
+      node[vdd] {};
+
+  \draw (gnd|-mncm3r.source) 
+      to [short,*-] ++ (0,-0.1)
+      node[vss] {};
+
+
+  \coordinate (outi) at ($(mpcm4a.drain)!0.5!(mncm2a.drain)$);
+
+  \draw (outi) to [short,*-o] ++ (1.5,0)
+              node[right] {O};
+
+  \draw (mpcm4a.drain) to [open,f=$I_{\mathrm{3}}$] (outi);
+  \draw (mpcm4r.drain) to [open,f_=$I_{\mathrm{4}}$] (mpcm4r.drain|-outi);
+
+
+  \node[anchor=south west] at (mncm3r.gate) {X};
+  \node[anchor=south west] at (mncm2r.gate) {Y};
+  \node[anchor=south east] at (mpcm4a.gate) {Z};
+  \node[anchor=north] at (cm) {M};
+
+  \node[ anchor    = east
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mpcm1r.drain)!0.775!(mpcm1r.source)$) {MPCM1R};
+  \node[ anchor    = west
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mpcm1a.drain)!0.775!(mpcm1a.source)$) {MPCM1A};
+  \node[ anchor    = west
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mpd1a.drain)!0.775!(mpd1a.source)$) {MPD1A};
+  \node[ anchor    = east
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mpd1b.drain)!0.775!(mpd1b.source)$) {MPD1B};
+  \node[ anchor    = east
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mncm2r.source)!0.775!(mncm2r.drain)$) {MNCM2R};
+  \node[ anchor    = west
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mncm2a.source)!0.775!(mncm2a.drain)$) {MNCM2A};
+
+  \node[ anchor    = east
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mncm3r.source)!0.775!(mncm3r.drain)$) {MNCM3R};
+  \node[ anchor    = west
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mncm3a.source)!0.775!(mncm3a.drain)$) {MNCM3A};
+  \node[ anchor    = east
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mpcm4r.drain)!0.775!(mpcm4r.source)$) {MPCM4R};
+  \node[ anchor    = west
+       , inner sep = 2pt
+       , font      = \footnotesize
+       ] () at ($(mpcm4a.drain)!0.775!(mpcm4a.source)$) {MPCM4A};
+
+}
