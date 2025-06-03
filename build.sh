@@ -32,9 +32,9 @@ for texfile in *.tex; do
 
   pdflatex --shell-escape $texfile
   cp $file.pdf ./../$file.pdf
-
+  cp $file.png ./../$file.png
   echo "      <dt><a href="${REPO}blob/main/figs/$texfile">$texfile</a></dt>" >> ./../index.html
-  echo "      <dd><embed src= "$file.pdf" alt="$file"/></dd>" >> ./../index.html
+  echo "      <dd><embed src= "$file.png" alt="$file"/></dd>" >> ./../index.html
 
 done
 
