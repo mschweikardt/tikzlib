@@ -41,7 +41,7 @@ jobs:
           name: result
           path: |
             *.pdf
-            *.svg
+            *.png
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
