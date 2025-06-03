@@ -30,7 +30,7 @@ for texfile in *.tex; do
 
   file=${texfile%.*}
 
-  pdflatex $texfile
+  pdflatex --shell-escape $texfile
   cp $file.pdf ./../$file.pdf
 
   echo "      <dt><a href="${REPO}blob/main/figs/$texfile">$texfile</a></dt>" >> ./../index.html
