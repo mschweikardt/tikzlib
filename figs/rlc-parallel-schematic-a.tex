@@ -1,0 +1,21 @@
+\newcommand{\RlcParallelSchematicA}
+{
+  \draw (0,0) to [short,-,i=$i_{\mathrm{I}}(t)$] (1,0)
+              to [R,l=$R_{}$,-*] (1,-2)
+              to [short,-] (0,-2);
+
+  \draw (1,0) to [short,*-] (2,0)
+              to [american inductor,l=$L_{}$,-] (2,-2)
+              to [short,*-] (1,-2);
+
+  \draw (2,0) to [short,*-,i=$i_{\mathrm{O}}(t)$] (3,0)
+              to [C,l=$C_{}$] (3,-2)
+              to [short,-] (2,-2);             
+
+  \node[ground] () at (2,-2) {};
+
+
+  \draw (-0.5,0) to [short,-o] (-0.1,0) to [short,-] (0,0);
+  \draw (-0.5,-2) to [short,-o] (-0.1,-2) to [short,-] (0,-2);
+  \draw (-0.5,0) to [I]  (-0.5,-2);
+}
