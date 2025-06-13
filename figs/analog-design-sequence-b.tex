@@ -1,0 +1,45 @@
+\newcommand{\AnalogCircuitDesignSequenceB}
+{
+ \node[ draw=black
+      , text width=2.7cm
+      , minimum size=1.2cm
+      , align=center
+      , rounded corners
+      , thick
+      , font=\Large
+      , fill=lightgray
+      ] (schematic) at (0,0) {Schematic};
+
+ \node[anchor=east] (circuit) at (schematic.west) {
+   \smartdiagram[sequence diagram]{\quad}
+ };
+
+ \node[anchor=west] (layout) at (schematic.east) {
+   \smartdiagram[sequence diagram]{\quad}
+ };
+
+ \node[ draw=black
+      , text width=2.7cm
+      , minimum size=1.2cm
+      , align=center
+      , rounded corners
+      , thick
+      , font=\Large
+      , fill=lightgray
+      , anchor=west
+      ] at (layout.east) {Layout};
+
+ \node[ draw=black
+      , text width=2.7cm
+      , minimum size=1.2cm
+      , align=center
+      , rounded corners
+      , thick
+      , font=\Large
+      , fill=lightgray
+      , anchor=east
+      ] at (circuit.west) {Specification};
+
+ \node[anchor=south, font=\large\bfseries] at (circuit.north) {Circuit Design};
+ \node[anchor=south, font=\large\bfseries] at (layout.north) {Layout Design};
+}
