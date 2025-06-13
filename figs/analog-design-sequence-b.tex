@@ -11,11 +11,11 @@
       ] (schematic) at (0,0) {Schematic};
 
  \node[anchor=east] (circuit) at (schematic.west) {
-   \smartdiagram[sequence diagram]{\quad}
+   \smartdiagram[sequence diagram]{Circuit Design}
  };
 
  \node[anchor=west] (layout) at (schematic.east) {
-   \smartdiagram[sequence diagram]{\quad}
+   \smartdiagram[sequence diagram]{Layout Design}
  };
 
  \node[ draw=black
@@ -39,7 +39,4 @@
       , fill=lightgray
       , anchor=east
       ] at (circuit.west) {Specification};
-
- \node[anchor=south, font=\large\bfseries] at (circuit.north) {Circuit Design};
- \node[anchor=south, font=\large\bfseries] at (layout.north) {Layout Design};
 }
