@@ -1,0 +1,71 @@
+\newcommand{\CmosSchmittTriggerTransferCharA}
+{
+\begin{axis}[ xmin=0
+            , xmax=1.15
+            , ymin=0
+            , ymax=1.2
+            , xtick={0}
+            , ytick={0}
+            , yticklabels={,}
+            , xticklabels={,}
+            , extra x ticks={0,0.3,0.5,0.7,1.0}
+            , extra x tick labels={ \SI{0}{\volt}
+                                  , $V_{\mathrm{T,L}}$
+                                  , $\nicefrac{V_{\mathrm{DD}}}{2}$
+                                  , $V_{\mathrm{T,H}}$
+                                  , $V_{\mathrm{DD}}$
+                                  }
+            , extra y ticks={ 0.015
+                            , 0.515
+                            , 1.015
+                            }
+            , extra y tick labels={ \SI{0}{\volt}
+                                  , $\nicefrac{V_{\mathrm{DD}}}{2}$
+                                  , $V_{\mathrm{DD}}$
+                                  }
+            , inner axis line style={semithick,black}
+            , axis lines=center
+            , axis line style={-Latex[round]}
+            , every axis x label/.style={ at={(ticklabel* cs:0.975)}
+                                        , anchor=south
+                                        , inner sep=2.5pt
+                                        }
+            , every axis y label/.style={ at={(ticklabel* cs:0.975)}
+                                        , anchor=west
+                                        , inner sep=2.5pt
+                                        }
+            , clip=false
+            , major tick length=1.75pt
+            , xlabel=$V_{\mathrm{I}}$ in \si{\volt}
+            , ylabel= $V_{\mathrm{O}}$ in \si{\volt}
+            , width=0.5\textwidth
+            , height=0.35\textwidth
+            , every tick/.style={black}
+            , tick align=outside
+            ]
+
+  \draw [densely dashed,gray] 
+          (axis cs:0,0.5+0.015) 
+       -- (axis cs:1.0,0.5+0.015); 
+  \draw [densely dashed,gray] 
+          (axis cs:0,0.0+0.015) 
+       -- (axis cs:0.3,0.0+0.015); 
+
+  \draw [densely dashed,gray] 
+          (axis cs:0.5,0.0) 
+       -- (axis cs:0.5,1.05);    
+
+  \draw [thick] 
+        (axis cs:0.0,1.0+0.015) 
+     -- (axis cs:0.3,1.0+0.015)
+     to node[currarrow,rotate=90] {} (axis cs:0.3,0.0+0.015)
+     -- (axis cs:0.7,0.0+0.015)
+     -- (axis cs:1.0,0.0+0.015);
+
+  \draw [thick] 
+        (axis cs:0.0,1.0+0.015) 
+     -- (axis cs:0.7,1.0+0.015)
+     to node[currarrow,rotate=270] {} (axis cs:0.7,0.0+0.015)
+     -- (axis cs:1.0,0.0+0.015);                   
+\end{axis}
+}
