@@ -1,26 +1,23 @@
-\newcommand{\MosfetEqCircD}
-{
-  \newcommand\height{2.0}
+\newcommand\height{2.0}
 
-  \draw (4.75, \height/2) coordinate (vdsp)  
-     to [short,o-,i_=$\underline{I}_{\mathrm{D}}$] ++ (-1.25,0) coordinate (rop)  
-     to [short,*-] ++ (-2.00,0)
-     to [ american controlled current source
-        , l=$g_{\mathrm{m}}\underline{V}_{\mathrm{GS}}$
-        ] ++ (0,-\height) coordinate (gnd)
-     to [short,-*] (gnd-|rop) coordinate (ron)         
-     to [short,-o] (gnd-|vdsp) coordinate (vdsn);
+\draw (4.75, \height/2) coordinate (vdsp)  
+   to [short,o-,i_=$\underline{I}_{\mathrm{D}}$] ++ (-1.25,0) coordinate (rop)  
+   to [short,*-] ++ (-2.00,0)
+   to [ american controlled current source
+      , l=$g_{\mathrm{m}}\underline{V}_{\mathrm{GS}}$
+      ] ++ (0,-\height) coordinate (gnd)
+   to [short,-*] (gnd-|rop) coordinate (ron)         
+   to [short,-o] (gnd-|vdsp) coordinate (vdsn);
 
-  \draw (rop) to [R,l=$g_{\mathrm{DS}}$]  (ron);
-  \draw [] (0,  \height/2) coordinate (vgsp)   to [short,o-]   ++ (0.5,0);
-  \draw [] (0, -\height/2) coordinate (vgsn)   to [short,o-*]  (gnd);  
+\draw (rop) to [R,l=$g_{\mathrm{DS}}$]  (ron);
+\draw [] (0,  \height/2) coordinate (vgsp)   to [short,o-]   ++ (0.5,0);
+\draw [] (0, -\height/2) coordinate (vgsn)   to [short,o-*]  (gnd);  
 
-  \path [voltarrow] (vgsp) edge node [midway,left,inner sep=2pt] 
-      {$\underline{V}_{\mathrm{GS}}$} (vgsn);
-  \path [voltarrow] (vdsp) edge node [midway,right,inner sep=2pt] 
-    {$\underline{V}_{\mathrm{DS}}$} (vdsn);
-  \node[anchor=east] at (vgsp) {G};
-  \node[anchor=east] at (vgsn) {S};
-  \node[anchor=west] at (vdsp) {D};
-  \node[anchor=west] at (vdsn) {S};
-}
+\path [voltarrow] (vgsp) edge node [midway,left,inner sep=2pt] 
+    {$\underline{V}_{\mathrm{GS}}$} (vgsn);
+\path [voltarrow] (vdsp) edge node [midway,right,inner sep=2pt] 
+  {$\underline{V}_{\mathrm{DS}}$} (vdsn);
+\node[anchor=east] at (vgsp) {G};
+\node[anchor=east] at (vgsn) {S};
+\node[anchor=west] at (vdsp) {D};
+\node[anchor=west] at (vdsn) {S};
