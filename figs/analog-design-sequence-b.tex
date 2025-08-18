@@ -1,42 +1,39 @@
-\newcommand{\AnalogCircuitDesignSequenceB}
-{
- \node[ draw=black
-      , text width=2.7cm
-      , minimum size=1.2cm
-      , align=center
-      , rounded corners
-      , thick
-      , font=\Large
-      , fill=lightgray
-      ] (schematic) at (0,0) {Schematic};
+\node[ draw=black
+     , text width=2.7cm
+     , minimum size=1.2cm
+     , align=center
+     , rounded corners
+     , thick
+     , font=\Large
+     , fill=lightgray
+     ] (schematic) at (0,0) {Schematic};
 
- \node[anchor=east] (circuit) at (schematic.west) {
-   \smartdiagram[sequence diagram]{Circuit Design}
- };
+\node[anchor=east] (circuit) at (schematic.west) {
+ \smartdiagram[sequence diagram]{Circuit Design}
+};
 
- \node[anchor=west] (layout) at (schematic.east) {
-   \smartdiagram[sequence diagram]{Layout Design}
- };
+\node[anchor=west] (layout) at (schematic.east) {
+ \smartdiagram[sequence diagram]{Layout Design}
+};
 
- \node[ draw=black
-      , text width=2.7cm
-      , minimum size=1.2cm
-      , align=center
-      , rounded corners
-      , thick
-      , font=\Large
-      , fill=lightgray
-      , anchor=west
-      ] at (layout.east) {Layout};
+\node[ draw=black
+     , text width=2.7cm
+     , minimum size=1.2cm
+     , align=center
+     , rounded corners
+     , thick
+     , font=\Large
+     , fill=lightgray
+     , anchor=west
+     ] at (layout.east) {Layout};
 
- \node[ draw=black
-      , text width=2.7cm
-      , minimum size=1.2cm
-      , align=center
-      , rounded corners
-      , thick
-      , font=\Large
-      , fill=lightgray
-      , anchor=east
-      ] at (circuit.west) {Specification};
-}
+\node[ draw=black
+     , text width=2.7cm
+     , minimum size=1.2cm
+     , align=center
+     , rounded corners
+     , thick
+     , font=\Large
+     , fill=lightgray
+     , anchor=east
+     ] at (circuit.west) {Specification};
