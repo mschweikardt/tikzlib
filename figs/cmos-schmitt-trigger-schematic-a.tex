@@ -1,112 +1,109 @@
-\newcommand{\CmosSchmittTriggerSchematicA}
-{
-  \newcommand\distA{0.6}  % distance between nmos/pmos
-  \newcommand\distB{0.4}  % distance between output transistors
-  \newcommand\distC{0.8}  % distance between input node and gates
-  \newcommand\distD{0.2}  % distance between shoot-though path and fb nmos/pmos
-  \newcommand\distE{0.1}  % distance between fb pmos and vss
-  \newcommand\distF{0.3}  % distance between fb pmos/nmos
-  \newcommand\distG{0.5}  % output node overlapp
-  \newcommand\distH{0.2}  % distance between circuit and rails
+\newcommand\distA{0.6}  % distance between nmos/pmos
+\newcommand\distB{0.4}  % distance between output transistors
+\newcommand\distC{0.8}  % distance between input node and gates
+\newcommand\distD{0.2}  % distance between shoot-though path and fb nmos/pmos
+\newcommand\distE{0.1}  % distance between fb pmos and vss
+\newcommand\distF{0.3}  % distance between fb pmos/nmos
+\newcommand\distG{0.5}  % output node overlapp
+\newcommand\distH{0.2}  % distance between circuit and rails
 
-  \node[nmos] (nmos1) at (0,0) {};
-  \draw (nmos1.drain) to [short,-*] ++ (0,\distA/2) coordinate (fbn)
-                      to [short,-] ++ (0,\distA/2)
-                      node[nmos,anchor=source] (nmos2) {}; 
+\node[nmos] (nmos1) at (0,0) {};
+\draw (nmos1.drain) to [short,-*] ++ (0,\distA/2) coordinate (fbn)
+                    to [short,-] ++ (0,\distA/2)
+                    node[nmos,anchor=source] (nmos2) {}; 
 
-  \draw (nmos2.drain) to [short,-*] ++ (0,\distB/2) coordinate (out)
-                      to [short,-]  ++ (0,\distB/2)
-                      node[pmos,anchor=drain] (pmos2) {}; 
+\draw (nmos2.drain) to [short,-*] ++ (0,\distB/2) coordinate (out)
+                    to [short,-]  ++ (0,\distB/2)
+                    node[pmos,anchor=drain] (pmos2) {}; 
 
-  \draw (pmos2.source) to [short,-*] ++ (0,\distA/2) coordinate (fbp)
-                       to [short,-] ++ (0,\distA/2)
-                       node[pmos,anchor=drain] (pmos1) {}; 
+\draw (pmos2.source) to [short,-*] ++ (0,\distA/2) coordinate (fbp)
+                     to [short,-] ++ (0,\distA/2)
+                     node[pmos,anchor=drain] (pmos1) {}; 
 
-  \draw (pmos1.gate) to [short,-] ++ (-\distC/2,0) coordinate (i)
-                     to [short,-] (i|-nmos1.gate)
-                     to [short,-] (nmos1.gate);
+\draw (pmos1.gate) to [short,-] ++ (-\distC/2,0) coordinate (i)
+                   to [short,-] (i|-nmos1.gate)
+                   to [short,-] (nmos1.gate);
 
-  \draw (i|-pmos2.gate) to [short,*-] (pmos2.gate);
-  \draw (i|-nmos2.gate) to [short,*-] (nmos2.gate);
-  \draw (i|-out) to [short,*-o] ++ (-\distC/2,0) coordinate (in);
+\draw (i|-pmos2.gate) to [short,*-] (pmos2.gate);
+\draw (i|-nmos2.gate) to [short,*-] (nmos2.gate);
+\draw (i|-out) to [short,*-o] ++ (-\distC/2,0) coordinate (in);
 
-  \draw (fbp) to [short,-] ++ (\distD,0)
-              node[pmos,anchor=source,rotate=90] (pmos3) {}; 
-  \draw (fbn) to [short,-] ++ (\distD,0)
-              node[nmos,anchor=source,rotate=270] (nmos3) {}; 
+\draw (fbp) to [short,-] ++ (\distD,0)
+            node[pmos,anchor=source,rotate=90] (pmos3) {}; 
+\draw (fbn) to [short,-] ++ (\distD,0)
+            node[nmos,anchor=source,rotate=270] (nmos3) {}; 
 
-  \draw (pmos3.gate) -- (nmos3.gate);
+\draw (pmos3.gate) -- (nmos3.gate);
 
 
-  \draw (pmos3.drain) to [short,-] ++ (\distE,0) coordinate (fbpn)
-                      to [short,-] (fbpn|-nmos1.source);
+\draw (pmos3.drain) to [short,-] ++ (\distE,0) coordinate (fbpn)
+                    to [short,-] (fbpn|-nmos1.source);
 
-  \draw (nmos3.drain) to [short,-] (nmos3.drain-|fbpn)
-                      to [short,-] ++ (\distF,0) coordinate (fbpp)
-                      to [short,-] (fbpp|-pmos1.source);
+\draw (nmos3.drain) to [short,-] (nmos3.drain-|fbpn)
+                    to [short,-] ++ (\distF,0) coordinate (fbpp)
+                    to [short,-] (fbpp|-pmos1.source);
 
 
-  \draw (out) to [short,-*] (out-|nmos3.gate)
-              to [short,-] (out-|fbpp)
-              to [short,-o] ++ (\distG,0) coordinate (out);
+\draw (out) to [short,-*] (out-|nmos3.gate)
+            to [short,-] (out-|fbpp)
+            to [short,-o] ++ (\distG,0) coordinate (out);
 
-  %VSS routing
-  \draw (fbpn|-nmos1.source) to [short,-] ++ (0,-\distH) coordinate (vss);
-  \draw (vss-|in) to [short,o-] (nmos1.source|-vss)
-                  to [short,-] (vss)
-                  to [short,*-o] (out|-vss);
-  \draw (nmos1.source) to [short,-*] (nmos1.source|-vss);
+%VSS routing
+\draw (fbpn|-nmos1.source) to [short,-] ++ (0,-\distH) coordinate (vss);
+\draw (vss-|in) to [short,o-] (nmos1.source|-vss)
+                to [short,-] (vss)
+                to [short,*-o] (out|-vss);
+\draw (nmos1.source) to [short,-*] (nmos1.source|-vss);
 
-  %VDD routing
-  \draw (fbpp|-pmos1.source) to [short,-] ++ (0,\distH) coordinate (vdd);
-  \draw (vdd-|in) to [short,o-] (pmos1.source|-vdd)
-                  to [short,-] (vdd);
-  \draw (pmos1.source) to [short,-*] (pmos1.source|-vdd);
+%VDD routing
+\draw (fbpp|-pmos1.source) to [short,-] ++ (0,\distH) coordinate (vdd);
+\draw (vdd-|in) to [short,o-] (pmos1.source|-vdd)
+                to [short,-] (vdd);
+\draw (pmos1.source) to [short,-*] (pmos1.source|-vdd);
 
-  %voltage arrows
-  \path [voltarrow] (out) edge[] 
-    node[midway,right,inner sep=1pt] 
-    {$V_{\mathrm{O}}$} (out|-vss);
+%voltage arrows
+\path [voltarrow] (out) edge[] 
+  node[midway,right,inner sep=1pt] 
+  {$V_{\mathrm{O}}$} (out|-vss);
 
-  \path [voltarrow] (in) edge[] 
-    node[midway,left,inner sep=1pt] 
-    {$V_{\mathrm{I}}$} (in|-vss); 
+\path [voltarrow] (in) edge[] 
+  node[midway,left,inner sep=1pt] 
+  {$V_{\mathrm{I}}$} (in|-vss); 
 
-  %annotate instance names and nodes
-  \node [ anchor=west
-        , inner sep=1pt
-        , font=\footnotesize
-        ] () at ($(nmos1.drain)!0.5!(nmos1.source)$) {NM0}; 
-  \node [ anchor=west
-        , inner sep=1pt
-        , font=\footnotesize
-        ] () at ($(nmos2.drain)!0.5!(nmos2.source)$) {NM1};  
-  \node [ anchor=west
-        , rotate = 270
-        , inner sep=1pt
-        , font=\footnotesize
-        ] () at ($(nmos3.drain)!0.5!(nmos3.source)$) {NM2};  
-  \node [ anchor=west
-        , inner sep=1pt
-        , font=\footnotesize
-        ] () at ($(pmos1.drain)!0.5!(pmos1.source)$) {PM0}; 
-  \node [ anchor=west
-        , inner sep=1pt
-        , font=\footnotesize
-        ] () at ($(pmos2.drain)!0.5!(pmos2.source)$) {PM1};  
-  \node [ anchor=west
-        , rotate = 90
-        , inner sep=1pt
-        , font=\footnotesize
-        ] () at ($(pmos3.drain)!0.5!(pmos3.source)$) {PM2};  
+%annotate instance names and nodes
+\node [ anchor=west
+      , inner sep=1pt
+      , font=\footnotesize
+      ] () at ($(nmos1.drain)!0.5!(nmos1.source)$) {NM0}; 
+\node [ anchor=west
+      , inner sep=1pt
+      , font=\footnotesize
+      ] () at ($(nmos2.drain)!0.5!(nmos2.source)$) {NM1};  
+\node [ anchor=west
+      , rotate = 270
+      , inner sep=1pt
+      , font=\footnotesize
+      ] () at ($(nmos3.drain)!0.5!(nmos3.source)$) {NM2};  
+\node [ anchor=west
+      , inner sep=1pt
+      , font=\footnotesize
+      ] () at ($(pmos1.drain)!0.5!(pmos1.source)$) {PM0}; 
+\node [ anchor=west
+      , inner sep=1pt
+      , font=\footnotesize
+      ] () at ($(pmos2.drain)!0.5!(pmos2.source)$) {PM1};  
+\node [ anchor=west
+      , rotate = 90
+      , inner sep=1pt
+      , font=\footnotesize
+      ] () at ($(pmos3.drain)!0.5!(pmos3.source)$) {PM2};  
 
-  \node[ anchor=east
-       , inner sep=2pt
-       , font=\footnotesize
-       ] () at (fbn) {X};
+\node[ anchor=east
+     , inner sep=2pt
+     , font=\footnotesize
+     ] () at (fbn) {X};
 
-  \node[ anchor=east
-       , inner sep=2pt
-       , font=\footnotesize
-       ] () at (fbp) {Y};
-}
+\node[ anchor=east
+     , inner sep=2pt
+     , font=\footnotesize
+     ] () at (fbp) {Y};
