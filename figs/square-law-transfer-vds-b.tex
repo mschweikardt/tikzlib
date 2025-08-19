@@ -1,33 +1,30 @@
-\newcommand{\SquareLawTransferVdsB}
-{
-  \useasboundingbox (-1,-0.5) rectangle (6.25,6);
-  \draw[dashed] (1.5,0) -- (1.5,5);
-  \draw[dashed] (5.0,0) -- (5.0,5);
+\useasboundingbox (-1,-0.5) rectangle (6.25,6);
+\draw[dashed] (1.5,0) -- (1.5,5);
+\draw[dashed] (5.0,0) -- (5.0,5);
 
-  \node[] (off) at (0.75,4.75) {off};
-  \node[] (sat) at (3.25,4.75) {saturation};
+\node[] (off) at (0.75,4.75) {off};
+\node[] (sat) at (3.25,4.75) {saturation};
 
-  \node[anchor=north] at (off.south) {$=0$};
-  \node[anchor=north] at (sat.south) {$\sim V_{\mathrm{GS}}^2$};
+\node[anchor=north] at (off.south) {$=0$};
+\node[anchor=north] at (sat.south) {$\sim V_{\mathrm{GS}}^2$};
 
-  \node[anchor=north] at (0,0) {0};
-  \draw[thin] (0,0) -- (0,-0.075);
-  \node[anchor=east] at (0,0.25) {0};
-  \draw[thin] (0,0.25) -- (-0.075,0.25);
+\node[anchor=north] at (0,0) {0};
+\draw[thin] (0,0) -- (0,-0.075);
+\node[anchor=east] at (0,0.25) {0};
+\draw[thin] (0,0.25) -- (-0.075,0.25);
 
 
-  \node[anchor=north] at (1.5,0) {$V_{\mathrm{TH}}$};
-  \draw[thin] (1.5,0) -- (1.5,-0.075);
+\node[anchor=north] at (1.5,0) {$V_{\mathrm{TH}}$};
+\draw[thin] (1.5,0) -- (1.5,-0.075);
 
-  \node[anchor=north] at (5.0,0) {$V_{\mathrm{GS,max}}$};
-  \draw[thin] (5.0,0) -- (5.0,-0.075);
+\node[anchor=north] at (5.0,0) {$V_{\mathrm{GS,max}}$};
+\draw[thin] (5.0,0) -- (5.0,-0.075);
 
-  \draw[{Latex[round,scale=1.2]}-{Latex[round,scale=1.2]},thick] 
-    (0,5.75) -- (0,0) -- (6,0);
+\draw[{Latex[round,scale=1.2]}-{Latex[round,scale=1.2]},thick] 
+  (0,5.75) -- (0,0) -- (6,0);
 
-  \draw[thick] (0,0.25) -- (1.5,0.25);
-  \draw[thick] plot[smooth,domain=1.5:5] (\x, {0.7*0.5*(\x-1.5)^2+0.25});
+\draw[thick] (0,0.25) -- (1.5,0.25);
+\draw[thick] plot[smooth,domain=1.5:5] (\x, {0.7*0.5*(\x-1.5)^2+0.25});
 
-  \node[anchor=south] at (6,0) {$V_{\mathrm{GS}}$};
-  \node[anchor=east] at (0,5.75) {$I_{\mathrm{D}}$};
-}
+\node[anchor=south] at (6,0) {$V_{\mathrm{GS}}$};
+\node[anchor=east] at (0,5.75) {$I_{\mathrm{D}}$};

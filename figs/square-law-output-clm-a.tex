@@ -1,59 +1,56 @@
-\newcommand{\SquareLawOutputClmA}
-{
-  \useasboundingbox (-1,-0.5) rectangle (6.25,6);
+\useasboundingbox (-1,-0.5) rectangle (6.25,6);
 
-  \node[] at (1.8,5.25) {ohmic};
-  \node[] at (4.55,5.25) {saturation};
+\node[] at (1.8,5.25) {ohmic};
+\node[] at (4.55,5.25) {saturation};
 
-  \draw[gray] (2.7, 2.17269) -- (4, 2.17269) -- (4, 2.2828);
-  \filldraw (2.7, 2.17269) circle (0.6pt);
-  \filldraw (4.0, 2.28280) circle (0.6pt);
+\draw[gray] (2.7, 2.17269) -- (4, 2.17269) -- (4, 2.2828);
+\filldraw (2.7, 2.17269) circle (0.6pt);
+\filldraw (4.0, 2.28280) circle (0.6pt);
 
-  \node[anchor=north] at (0,0) {0};
-  \draw[thin] (0,0) -- (0,-0.075);
-  \node[anchor=east] at (0,0.25) {0};
-  \draw[thin] (0,0.25) -- (-0.075,0.25);
+\node[anchor=north] at (0,0) {0};
+\draw[thin] (0,0) -- (0,-0.075);
+\node[anchor=east] at (0,0.25) {0};
+\draw[thin] (0,0.25) -- (-0.075,0.25);
 
-  \node[anchor=north] at (5.0,0) {$V_{\mathrm{DS,max}}$};
-  \draw[thin] (5.0,0) -- (5.0,-0.075);
+\node[anchor=north] at (5.0,0) {$V_{\mathrm{DS,max}}$};
+\draw[thin] (5.0,0) -- (5.0,-0.075);
 
-  \draw[{Latex[round,scale=1.2]}-{Latex[round,scale=1.2]},thick] 
-    (0,5.75) -- (0,0) -- (6,0);
+\draw[{Latex[round,scale=1.2]}-{Latex[round,scale=1.2]},thick] 
+  (0,5.75) -- (0,0) -- (6,0);
 
-  \draw[thick] (0,0.25) -- (5,0.25);
+\draw[thick] (0,0.25) -- (5,0.25);
 
-  \draw[thick] plot[smooth,domain=0:1.5] 
-    (\x, {0.7*((3-1.5)*\x-0.5*\x^2)*(1+0.05*\x)+0.25});
-  \draw[thick] plot[smooth,domain=1.5:5] 
-    (\x, {0.25+0.7875*(1+0.05*\x)});
+\draw[thick] plot[smooth,domain=0:1.5] 
+  (\x, {0.7*((3-1.5)*\x-0.5*\x^2)*(1+0.05*\x)+0.25});
+\draw[thick] plot[smooth,domain=1.5:5] 
+  (\x, {0.25+0.7875*(1+0.05*\x)});
 
-  \draw[thick] plot[smooth,domain=0:2.2] 
-    (\x, {0.7*((3.7-1.5)*\x-0.5*\x^2)*(1+0.05*\x)+0.25});
-  \draw[thick] plot[smooth,domain=2.2:5] 
-    (\x, {0.25+1.694*(1+0.05*\x)});
+\draw[thick] plot[smooth,domain=0:2.2] 
+  (\x, {0.7*((3.7-1.5)*\x-0.5*\x^2)*(1+0.05*\x)+0.25});
+\draw[thick] plot[smooth,domain=2.2:5] 
+  (\x, {0.25+1.694*(1+0.05*\x)});
 
-  \draw[thick] plot[smooth,domain=0:3.3] 
-    (\x, {0.7*((4.8-1.5)*\x-0.5*\x^2)*(1+0.05*\x)+0.25});
-  \draw[thick] plot[smooth,domain=3.3:5] 
-    (\x, {0.25+3.8115*(1+0.05*\x)});
+\draw[thick] plot[smooth,domain=0:3.3] 
+  (\x, {0.7*((4.8-1.5)*\x-0.5*\x^2)*(1+0.05*\x)+0.25});
+\draw[thick] plot[smooth,domain=3.3:5] 
+  (\x, {0.25+3.8115*(1+0.05*\x)});
 
-  \draw[dashed] plot[smooth,domain=0:3.7] 
-    (\x, {0.76*0.5*\x^2+0.25});
+\draw[dashed] plot[smooth,domain=0:3.7] 
+  (\x, {0.76*0.5*\x^2+0.25});
 
-  \node[anchor=south] at (6,0.00) {$V_{\mathrm{DS}}$};
-  \node[anchor=east]  at (0,5.75) {$I_{\mathrm{D}}$};
+\node[anchor=south] at (6,0.00) {$V_{\mathrm{DS}}$};
+\node[anchor=east]  at (0,5.75) {$I_{\mathrm{D}}$};
 
-  \draw[{Latex[round,scale=0.6]}-] (3.35,2.17269) --++ (0,-0.3) 
-    node[ anchor=north
-        , font=\scriptsize
-        , inner sep=2pt
-        ] {$\Delta V$};
-  \draw[{Latex[round,scale=0.6]}-] (4,2.227745) -- (4.5,2) 
-    node[ anchor=west
-        , font=\scriptsize
-        , inner sep=2pt
-        ] {$\Delta I$};
+\draw[{Latex[round,scale=0.6]}-] (3.35,2.17269) --++ (0,-0.3) 
+  node[ anchor=north
+      , font=\scriptsize
+      , inner sep=2pt
+      ] {$\Delta V$};
+\draw[{Latex[round,scale=0.6]}-] (4,2.227745) -- (4.5,2) 
+  node[ anchor=west
+      , font=\scriptsize
+      , inner sep=2pt
+      ] {$\Delta I$};
 
-  \node[anchor=east] at (4.75,3.25) 
-    {$g_{\mathrm{DS}} = \frac{\Delta I}{\Delta V}$};
-}
+\node[anchor=east] at (4.75,3.25) 
+  {$g_{\mathrm{DS}} = \frac{\Delta I}{\Delta V}$};

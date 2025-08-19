@@ -1,41 +1,38 @@
-\newcommand{\SquareLawGmA}
-{
- \useasboundingbox (-1,-0.5) rectangle (6.25,6);
+\useasboundingbox (-1,-0.5) rectangle (6.25,6);
 
-  \node[anchor=north] at (0,0) {0};
-  \draw[thin] (0,0) -- (0,-0.075);
-  \node[anchor=east] at (0,0.25) {0};
-  \draw[thin] (0,0.25) -- (-0.075,0.25);
+\node[anchor=north] at (0,0) {0};
+\draw[thin] (0,0) -- (0,-0.075);
+\node[anchor=east] at (0,0.25) {0};
+\draw[thin] (0,0.25) -- (-0.075,0.25);
 
-  \draw[{Latex[round,scale=1.2]}-{Latex[round,scale=1.2]},thick] 
-    (0,5.75) -- (0,0) -- (6,0);
+\draw[{Latex[round,scale=1.2]}-{Latex[round,scale=1.2]},thick] 
+  (0,5.75) -- (0,0) -- (6,0);
 
-  \draw[thick] (0,0.25) -- (1.5,0.25);
+\draw[thick] (0,0.25) -- (1.5,0.25);
 
-  \draw[gray] plot[smooth,domain=2.75:4.25] 
-    (\x, {1.4*(\x-3.5)+1.65});
+\draw[gray] plot[smooth,domain=2.75:4.25] 
+  (\x, {1.4*(\x-3.5)+1.65});
 
-  \draw[gray] (3, 0.95) -- (4, 0.95) -- (4, 2.35);
+\draw[gray] (3, 0.95) -- (4, 0.95) -- (4, 2.35);
 
-  \draw[{Latex[round,scale=0.6]}-] (3.5,0.95) --++ (0,-0.3) 
-    node[ anchor=north
-        , font=\scriptsize
-        , inner sep=2pt
-        ] {$\Delta V$};
+\draw[{Latex[round,scale=0.6]}-] (3.5,0.95) --++ (0,-0.3) 
+  node[ anchor=north
+      , font=\scriptsize
+      , inner sep=2pt
+      ] {$\Delta V$};
 
-  \draw[{Latex[round,scale=0.6]}-] (4,1.65) --++ (0.3,0) 
-    node[ anchor=west
-        , font=\scriptsize
-        , inner sep=2pt
-        ] {$\Delta I$};
+\draw[{Latex[round,scale=0.6]}-] (4,1.65) --++ (0.3,0) 
+  node[ anchor=west
+      , font=\scriptsize
+      , inner sep=2pt
+      ] {$\Delta I$};
 
-  \node[] at (2,3.5) 
-    {$g_{\mathrm{m}} = \frac{\Delta I}{\Delta V}$};
+\node[] at (2,3.5) 
+  {$g_{\mathrm{m}} = \frac{\Delta I}{\Delta V}$};
 
-  \draw[thick] plot[smooth,domain=1.5:5] (\x, {0.7*0.5*(\x-1.5)^2+0.25});
+\draw[thick] plot[smooth,domain=1.5:5] (\x, {0.7*0.5*(\x-1.5)^2+0.25});
 
-  \filldraw (3.5, 1.65) circle (1pt);
+\filldraw (3.5, 1.65) circle (1pt);
 
-  \node[anchor=south] at (6,0) {$V_{\mathrm{GS}}$};
-  \node[anchor=east] at (0,5.75) {$I_{\mathrm{D}}$};
-}
+\node[anchor=south] at (6,0) {$V_{\mathrm{GS}}$};
+\node[anchor=east] at (0,5.75) {$I_{\mathrm{D}}$};
