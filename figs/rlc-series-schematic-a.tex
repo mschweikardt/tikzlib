@@ -1,21 +1,18 @@
-\newcommand{\RlcSeriesSchematicA}
-{
-  \draw (0,0) to [short,-,i=$i(t)$] (0.5,0) 
-              to [R,l=$R_{}$,-] (2.5,0) 
-              to [american inductor,l=$L_{}$,-] (4.5,0)
-              to [C,l=$C_{}$,-*] (4.5,-2)
-              to [short,-] (0,-2);
+\draw (0,0) to [short,-,i=$i(t)$] (0.5,0) 
+            to [R,l=$R_{}$,-] (2.5,0) 
+            to [american inductor,l=$L_{}$,-] (4.5,0)
+            to [C,l=$C_{}$,-*] (4.5,-2)
+            to [short,-] (0,-2);
 
-  \draw (-1,0) to [short,-o] (-0.1,0) to [short,-] (0,0);
-  \draw (-1,-2) to [short,-o] (-0.1,-2) to [short,-] (0,-2);
-  \draw (-1,0) to [V]  (-1,-2);
-  \node[ground] () at (4.5,-2) {};
+\draw (-1,0) to [short,-o] (-0.1,0) to [short,-] (0,0);
+\draw (-1,-2) to [short,-o] (-0.1,-2) to [short,-] (0,-2);
+\draw (-1,0) to [V]  (-1,-2);
+\node[ground] () at (4.5,-2) {};
 
-  \draw (4.5,0) to [short,*-o] (5.5,0);
-  \draw (4.5,-2) to [short,-o] (5.5,-2);
+\draw (4.5,0) to [short,*-o] (5.5,0);
+\draw (4.5,-2) to [short,-o] (5.5,-2);
 
-  \path [voltarrow] (5.5,0) edge[] node [midway,right,inner sep=1pt] 
-    {$v_{\mathrm{O}}(t)$} (5.5,-2);
-  \path [voltarrow] (-0.1,0) edge[] node [midway,right,inner sep=1pt]
-    {$v_{\mathrm{I}}(t)$} (-0.1,-2);
-}
+\path [voltarrow] (5.5,0) edge[] node [midway,right,inner sep=1pt] 
+  {$v_{\mathrm{O}}(t)$} (5.5,-2);
+\path [voltarrow] (-0.1,0) edge[] node [midway,right,inner sep=1pt]
+  {$v_{\mathrm{I}}(t)$} (-0.1,-2);
