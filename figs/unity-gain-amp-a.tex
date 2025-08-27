@@ -1,0 +1,49 @@
+\node [ nmos
+      , scale=1.25
+      ] (m1) at (0,0) {};
+
+\draw (m1.gate) to[short,-*] ++ (-1.5,0) coordinate (a);
+
+\draw (a) to [ L
+             , l=$L_{\infty}$,inductor=american
+             ] ++ (0,-2) 
+          to [ V
+             , american voltage source
+             , v=$V_{\mathrm{GS,B}}$
+             ] ++ (0,-2) coordinate(gnd);
+
+\draw (gnd) -- (gnd-|m1.source) -- (m1.source);
+
+\draw (a) to [ C
+             , l_=$C_{\infty}$
+             ] ++ (-2,0) coordinate(inp)
+          to [ V
+             , sinusoidal voltage source
+             , v=$\underline{V}_{\mathrm{I}}$
+             ] (inp|-gnd) coordinate(inn)
+          to [short,-*] (gnd);
+
+\draw (m1.drain) to [short,-*] ++ (0,0) coordinate (b)
+                 to [short,- ] ++ (0.5,0) 
+                 to [ C
+                    , l=$C_{\infty}$
+                    ] ++ (2,0) coordinate (outp)
+                 to [ european resistor
+                    , -*
+                    , l=$\underline{Z}_{\mathrm{L}}$
+                    , v_=$\underline{V}_{\mathrm{O}}$
+                    ] (outp|-gnd);
+
+\draw (b) to [ L
+             , l=$L_{\infty}$
+             , inductor=american
+             ] ++ (0,2)  coordinate (c)
+          to [short,- ] (c-|outp)
+          to [short,- ] ++ (1.5,0) coordinate(vdsp)
+          to [ V
+             , american voltage source
+             , v=$V_{\mathrm{DS,B}}$
+             ] (gnd-|vdsp)
+          to [short,-*] (gnd-|m1.source);
+
+\node[vss] at (gnd-|m1.source) {};
