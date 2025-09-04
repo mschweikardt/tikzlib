@@ -1,0 +1,151 @@
+% based on Ch. 2 of "Systematic Design of Anlog Integrated Circuits: 
+% Using Pre-Computed Lookup Tables" by Paul G.A. Jespers and Boris Murmann
+\begin{axis}[ view={50}{30}
+            , ylabel=$\frac{g_{\mathrm{m}}}{I_{\mathrm{D}}}nV_{\mathrm{TH}}$
+            , xlabel=$\frac{V_{\mathrm{GS}}-V_{\mathrm{TH}}}{nV_{\mathrm{T}}}$ 
+            , zlabel=$\mathrm{IC}\equal\nicefrac{I_{\mathrm{D}}}{I_{\mathrm{S}}}$
+            , ymin=0
+            , ymax=1
+            , xmin=-12
+            , xmax=40
+            , zmin=0.01
+            , zmax=100
+            , zmode=log
+            , width =14cm
+            , height=14cm
+            , x dir = reverse
+            , y dir = reverse
+            , grid=both
+            , xtick={-10,0,...,40}
+            , every tick label/.append style={font=\footnotesize}
+            , legend style={nodes={scale=0.7, transform shape}}
+            ]
+
+  \addplot3[densely dotted,semithick, forget plot] coordinates{
+    (  40    , 0.833, 0.24) 
+    (  -3.209, 0.833, 0.24) 
+    (  -3.209, 0, 0.24) 
+  };
+  \addplot3[densely dotted,semithick, forget plot] coordinates{
+    (  -3.209, 0.833 , 0.24) 
+    (  -3.209, 0.833,  0.01) 
+  };
+  \addplot3[densely dotted,semithick, forget plot] coordinates{
+    (  40   , 0.167, 30) 
+    (  9.609, 0.167, 30) 
+    (  9.609, 0, 30) 
+  };
+  \addplot3[densely dotted,semithick, forget plot] coordinates{
+    ( 9.609, 0.167 , 30) 
+    ( 9.609, 0.167,  0.01) 
+  };
+
+  \addplot3[ mark=none
+           , domain=0.01:0.2
+           , samples=70
+           , smooth
+           , thick
+           , blue
+           , samples y  = 0
+           ] ({2*(x-1)+ln(x)},{1/(x+1)},{x^2+x});\addlegendentry{weak (W.I.)}
+  \addplot3[ mark=none
+           , domain=0.2:5
+           , samples=100
+           , smooth
+           , thick
+           , green
+           , samples y  = 0
+           ] ({2*(x-1)+ln(x)},{1/(x+1)},{x^2+x});\addlegendentry{moderate (M.I.)}
+  \addplot3[ mark=none
+           , domain=5:19.5
+           , samples=100
+           , smooth
+           , thick
+           , red
+           , samples y  = 0
+           ] ({2*(x-1)+ln(x)},{1/(x+1)},{x^2+x});\addlegendentry{strong (M.I.)}
+
+ \addplot3[ mark=none
+           , domain=0.01:0.2
+           , samples=70
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , blue
+           , forget plot
+           ] ({2*(x-1)+ln(x)},{1/(x+1)},{0.01}); 
+  \addplot3[ mark=none
+           , domain=0.2:5
+           , samples=100
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , green
+           , forget plot
+           ] ({2*(x-1)+ln(x)},{1/(x+1)},{0.01});  
+  \addplot3[ mark=none
+           , domain=5:19.5
+           , samples=50
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , red
+           , forget plot
+           ] ({2*(x-1)+ln(x)},{1/(x+1)},{0.01});  
+
+  \addplot3[ mark=none
+           , domain=0.01:0.2
+           , samples=70
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , blue
+           , forget plot
+           ] ({40},{1/(x+1)},{x^2+x});  
+  \addplot3[ mark=none
+           , domain=0.2:5
+           , samples=100
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , green
+           , forget plot
+           ] ({40},{1/(x+1)},{x^2+x});  
+  \addplot3[ mark=none
+           , domain=5:19.5
+           , samples=50
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , red
+           , forget plot
+           ] ({40},{1/(x+1)},{x^2+x}); 
+
+  \addplot3[ mark=none
+           , domain=0.01:0.2
+           , samples=70
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , blue
+           , forget plot
+           ] ({2*(x-1)+ln(x)},{0},{x^2+x});  
+  \addplot3[ mark=none
+           , domain=0.2:5
+           , samples=100
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , green
+           , forget plot
+           ] ({2*(x-1)+ln(x)},{0},{x^2+x});  
+  \addplot3[ mark=none
+           , domain=5:19.5
+           , samples=50
+           , smooth
+           , samples y  = 0
+           , densely dashed
+           , red
+           , forget plot
+           ] ({2*(x-1)+ln(x)},{0},{x^2+x}); 
+\end{axis}
