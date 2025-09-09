@@ -1,0 +1,43 @@
+\coordinate (origin) at (0,0);
+\node[nmos,xscale=-1] (mr) at (-2,0) {};
+\node[nmos]           (m1) at ( 2,0) {};
+\node[nmos]           (m2) at ( 5,0) {};
+
+\draw (mr.gate) -- (origin) -- (m1.gate)-- (m2.gate);
+
+\draw (mr.gate) to [short,*-] (mr.gate|-mr.drain) 
+                to [short,-*] (mr.drain);
+\draw (mr.drain) to [short,-o,f<_=$I_{\mathrm{R}}$] ++ (0,1.25) coordinate (in); 
+\draw (m1.drain) to [short,-o,f<=$I_{\mathrm{O,1}}$] (m1.drain|-in) coordinate (out1);  
+\draw (mr.source) to [short,-] ++ (0,-0.3) coordinate (x) 
+                  to [short,-*] (x-|origin) coordinate (gnd)
+                  to [short,-] (gnd-|m1.source) coordinate (x) 
+                  to [short,-] (m1.source);
+\draw (x) to [short,*-] (m2.source|-x) -- (m2.source);
+
+\draw (m2.drain) to [short,-o,f<=$I_{\mathrm{O,2}}$] (m2.drain|-in) coordinate (out2);
+
+\node[vss] at (gnd) {};
+
+\path [voltarrow] (mr.gate) edge[bend right=-30] 
+  node[midway,below right,inner sep=1pt] 
+  {$V_{\mathrm{GS}}$} (mr.source);
+\path [voltarrow] (m1.gate) edge[bend left=-30] 
+  node[midway,below left,inner sep=1pt] 
+  {$V_{\mathrm{GS}}$} (m1.source);
+\path [voltarrow] (m2.gate) edge[bend left=-30] 
+  node[midway,below left,inner sep=1pt] 
+  {$V_{\mathrm{GS}}$} (m2.source);
+
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mr.source)!0.775!(mr.drain)$) {MNCMR};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1.source)!0.775!(m1.drain)$) {MNCMA};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m2.source)!0.775!(m2.drain)$) {MNCMB};
