@@ -1,0 +1,39 @@
+\coordinate (origin) at (0,0);
+\node[pmos,xscale=-1] (mr) at (-2,0) {};
+\node[pmos]           (m1) at ( 2,0) {};
+
+\draw (mr.gate) -- (origin) -- (m1.gate);
+
+\draw (mr.gate) to [short,*-] (mr.gate|-mr.drain) 
+                to [short,-*] (mr.drain);
+\draw (mr.drain) to [short,-o,f=$I_{\mathrm{R}}$] ++ (0,-1.25) coordinate (in); 
+\draw (m1.drain) to [short,-o,f_=$I_{\mathrm{O}}$] (m1.drain|-in) coordinate (out);  
+\draw (mr.source) to [short,-] ++ (0,0.3) coordinate (x) 
+                  to [short,-*] (x-|origin) coordinate (gnd)
+                  to [short,-] (gnd-|m1.source) 
+                  to [short,-] (m1.source);
+
+\node[vdd] at (gnd) {};
+
+\path [voltarrow] (mr.gate) edge[bend left=-30] 
+  node[midway,above right,inner sep=1pt] 
+  {$V_{\mathrm{GS}}$} (mr.source);
+\path [voltarrow] (m1.gate) edge[bend right=-30] 
+  node[midway,above left,inner sep=1pt] 
+  {$V_{\mathrm{GS}}$} (m1.source);
+
+\path [voltarrow] ($(in)+(-1,0)$) edge[bend right=-30] 
+  node[midway,left,inner sep=1pt] 
+  {$V_{\mathrm{R}}$} ($(mr.source)+(-1,0)$);
+\path [voltarrow] ($(out)+(1,0)$) edge[bend left=-30] 
+  node[midway,right,inner sep=1pt] 
+  {$V_{\mathrm{O}}$} ($(m1.source)+(1,0)$);
+
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mr.source)!0.775!(mr.drain)$) {MPCMR};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1.source)!0.775!(m1.drain)$) {MPCMA};
