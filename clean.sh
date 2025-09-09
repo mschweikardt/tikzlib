@@ -16,3 +16,5 @@ rm -f *.log
 rm -f *.aux
 rm -f *.png
 cd ..
+
+rm index.html
