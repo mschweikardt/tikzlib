@@ -1,0 +1,112 @@
+% Banba bandgap
+\newcommand\distA{4.0}  % distance between devices
+
+\coordinate (vss) at (0,0);
+
+\draw (vss) to [short,*-] (-\distA/2,0)
+            to [short,-] ++ (0,0.1)
+            node[pnp,anchor=collector,xscale=-1] (pnp1) {};
+\draw (vss) to [short,-] (\distA/2,0) coordinate (im)
+            to [short,-] (im|-pnp1.collector)
+            node[pnp,anchor=collector] (pnp2) {};    
+
+\draw (pnp1.base) to [short,-*] (vss-|pnp1.base);
+\draw (pnp2.base) to [short,-*] (vss-|pnp2.base);
+
+
+\draw (pnp2.emitter) to [R,l=$R_3$,-*] ++ (0,2) coordinate (x);
+\draw (pnp1.emitter) to [short,-*] (pnp1.emitter|-x) coordinate (y);
+
+\node[ op amp
+     , rotate=90
+     , anchor=west
+     , scale=.7
+     ] (op) at (vss|-x) {};
+
+\draw (x) to [short,-] (x-|op.+);
+\draw (y) to [short,-] (x-|op.-);
+
+\draw (x) to [short,-] ++ (0,1)
+          node[pmos,anchor=drain] (mp2) {};
+
+\draw (y) to [short,-] (y|-mp2.drain)
+          node[pmos,anchor=drain,xscale=-1] (mp1) {};
+
+\draw (mp1.gate) -- (mp2.gate);
+\draw (op.out) to [short,-*] (mp1.gate-|op.out);
+
+
+\draw (y) to [short,-] ++ (-1.75,0) coordinate (im)
+          to [R,l=$R_1$,-] (im|-vss)
+          to [short,-*] (pnp1.collector|-vss);
+
+\draw (x) to [short,-] ++ (1.75,0) coordinate (im)
+          to [R,l=$R_2$,-] (im|-vss) coordinate (im)
+          to [short,-*] (pnp2.collector|-vss);
+
+\draw (mp2.gate) to [short,-] (im|-mp2.gate)
+                 to [short,-] ++ (0.5,0)
+                 node[pmos,anchor=gate] (mp3) {};
+
+\draw (mp3.drain) to [short,-] (mp3.drain|-x)
+                  to [R,l=$R_4$,-] (mp3.drain|-im)
+                  to [short,-*] (im);
+
+\draw (mp3.drain|-x) to [short,*-o] ++ (1,0) node[anchor=west] {O};
+
+\draw (mp1.source) to [short,-*] (mp1.source-|vss) coordinate (vdd)
+                   to [short,-*] (mp2.source)
+                   to [short,-] (mp3.source);
+
+\node[vdd] at (vdd) {};
+\node[vss] at (vss) {};            
+
+\path [voltarrow] (pnp2.emitter) edge[bend right=30] 
+  node[midway,above left,font=\footnotesize,inner sep=1pt] 
+  {$V_{\mathrm{EB,1B}}$} (pnp2.base);
+
+\path [voltarrow] (pnp1.emitter) edge[bend left=30] 
+  node[midway,above right,font=\footnotesize,inner sep=1pt] 
+  {$V_{\mathrm{EB,1A}}$} (pnp1.base);
+
+\path [voltarrow] ($(x)+(0.1,-0.2)$) edge[bend left=20] 
+  node[midway,right,font=\footnotesize,inner sep=1pt] 
+  {$V_{\mathrm{R3}}$} ($(pnp2.emitter)+(0.1,0.2)$);  
+
+\path [voltarrow] ($(op.+)+(0.15,-0.1)$) edge[bend left=20] 
+  node[midway,below,font=\footnotesize,inner sep=2pt] 
+  {$V_{\mathrm{OS}}$} ($(op.-)+(-0.15,-0.1)$); 
+
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(pnp1.collector)!0.775!(pnp1.emitter)$) {Q1A};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize\tt
+     ] () at ($(pnp1.collector)!0.5!(pnp1.emitter)$) {A};
+
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(pnp2.collector)!0.775!(pnp2.emitter)$) {Q1B};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize\tt
+     ] () at ($(pnp2.collector)!0.5!(pnp2.emitter)$) {nA};
+
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mp1.drain)!0.775!(mp1.source)$) {MP1A};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mp2.drain)!0.775!(mp2.source)$) {MP1B};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mp3.drain)!0.775!(mp3.source)$) {MP1C};
+
+\node[anchor=south west] at (x) {X};
+\node[anchor=south east] at (y) {Y};
