@@ -1,0 +1,68 @@
+\coordinate (vss) at (0,0);
+
+\draw (vss) to [R,l=$R_1$,-] ++ (0,2) coordinate (x)
+            to [R,l=$R_2$,*-] ++ (0,2) coordinate (y)  
+            node[npn,anchor=emitter,xscale=-1] (q1) {};
+
+\draw (q1.base) to [short,-] ++ (2,0)
+                node[npn,anchor=gate,xscale=-1] (q2) {};
+
+\draw (q2.emitter) to [short,-] (q2.emitter|-x)
+                   to [short,-] (x);
+
+\node[vss] at (vss) {};  
+
+\draw (q2.collector) to[short,-] ++ (0,1)
+                     to[short,-] ++ (1,0)
+                     node[ op amp
+                         , anchor=+
+                         , scale=.7
+                         , yscale=-1
+                         ] (op) {};
+
+\draw (op.-) -- (op.--|q1.collector) -- (q1.collector);
+
+\draw (op.+-|q2.collector) to [R,l=$R_3$,*-] ++ (0,1.75) coordinate (topr);
+\draw (op.--|q1.collector) to [short,*-] (op.+-|q1.collector)
+                           to [R,l=$R_3$,-] (topr-|q1.collector) coordinate (topl);
+
+\coordinate (vdd) at ($(topr)!0.5!(topl)$);
+
+\draw (topl) to [short,-*] (vdd) -- (topr);
+
+\node[vdd] at (vdd) {};  
+
+\draw (op.out) to [short,-o] ++ (0.5,0) node[anchor=west] {O};
+
+\draw (op.out) to [short,*-] (op.out|-q2.base) -- (q2.base);
+
+\path [voltarrow] (q1.base) edge[bend left=30] 
+  node[midway,below right,font=\footnotesize,inner sep=1pt] 
+  {$V_{\mathrm{BE,1A}}$} (q1.emitter);
+\path [voltarrow] (q2.base) edge[bend left=30] 
+  node[midway,below right,font=\footnotesize,inner sep=1pt] 
+  {$V_{\mathrm{BE,1B}}$} (q2.emitter);
+\path [voltarrow] ($(y)+(0.1,-0.2)$) edge[bend left=20] 
+  node[midway,right,font=\footnotesize,inner sep=1pt] 
+  {$V_{\mathrm{R2}}$} ($(x)+(0.1,0.2)$);  
+\path [voltarrow] ($(x)+(0.1,-0.2)$) edge[bend left=20] 
+  node[midway,right,font=\footnotesize,inner sep=1pt] 
+  {$V_{\mathrm{R1}}$} ($(vss)+(0.1,0.2)$);  
+
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(q1.emitter)!0.775!(q1.collector)$) {Q1A};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize\tt
+     ] () at ($(q1.emitter)!0.3!(q1.collector)$) {A};
+
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(q2.emitter)!0.775!(q2.collector)$) {Q1B};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize\tt
+     ] () at ($(q2.emitter)!0.3!(q2.collector)$) {nA};
