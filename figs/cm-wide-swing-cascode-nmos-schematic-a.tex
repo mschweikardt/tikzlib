@@ -1,0 +1,69 @@
+\coordinate (origin) at (0,0);
+\node[nmos,xscale=-1] (mr) at (-2,0) {};
+\node[nmos]           (m1) at ( 2,0) {};
+
+\draw (mr.gate) -- (origin) -- (m1.gate);
+
+\draw (mr.drain) to   [short,-] ++ (0,0.5)
+                 node [nmos,anchor=source,xscale=-1] (mx) {}; 
+
+\draw (mx.drain) to [short,-] ++ (0,0.1) coordinate (fb1)
+                 to [short,-o,f<_=$I_{\mathrm{R}}$] ++ (0,1.25) coordinate (in); 
+
+\coordinate (fb2) at ($(mr.gate)!0.4!(m1.gate)$);
+
+\draw (fb2) to [short,*-] (fb2|-fb1)
+            to [short,-*] (fb1);
+
+\draw (mr.source) to [short,-] ++ (0,-0.3) coordinate (x) 
+                  to [short,-*] (x-|origin) coordinate (gnd)
+                  to [short,-] (gnd-|m1.source) 
+                  to [short,-] (m1.source);
+
+\draw (m1.drain) to [short,-] (m1.drain|-mx.source)
+                 node [nmos,anchor=source] (m2) {}; 
+\draw (m2.gate) -- (mx.gate)
+      to [short,-o] ++ (-2,0) 
+      node[anchor=east] {B};
+
+\draw (m2.drain) to [short,-o,f<=$I_{\mathrm{O}}$] (m2.drain|-in) coordinate (out);  
+
+\node[vss] at (gnd) {};
+
+\path [voltarrow] ($(in)+(-1.5,0)$) edge[bend left=-30] 
+  node[midway,left,inner sep=1pt] 
+  {$V_{\mathrm{R}}$} ($(mr.source)+(-1.5,0)$);
+
+\path [voltarrow] (mr.gate) edge[bend right=-30] 
+  node[midway,below right,inner sep=1pt] 
+  {$V_{\mathrm{GS,1}}$} (mr.source);
+\path [voltarrow] (m1.gate) edge[bend left=-30] 
+  node[midway,below left,inner sep=1pt] 
+  {$V_{\mathrm{GS,1}}$} (m1.source);
+\path [voltarrow] (mx.gate) edge[bend right=-30] 
+  node[midway,below right,inner sep=1pt] 
+  {$V_{\mathrm{GS,2R}}$} (mx.source);
+\path [voltarrow] (m2.gate) edge[bend left=-30] 
+  node[midway,below left,inner sep=1pt] 
+  {$V_{\mathrm{GS,2A}}$} (m2.source);
+\path [voltarrow] ($(out)+(1,0)$) edge[bend right=-30] 
+  node[midway,right,inner sep=1pt] 
+  {$V_{\mathrm{O}}$} ($(m1.source)+(1,0)$);
+
+
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mr.source)!0.775!(mr.drain)$) {MNCM1R};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mx.source)!0.775!(mx.drain)$) {MNC1A};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1.source)!0.775!(m1.drain)$) {MNCM1A};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m2.source)!0.775!(m2.drain)$) {MNC1B};      
