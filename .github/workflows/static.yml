@@ -27,7 +27,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/xu-cheng/texlive-full:latest
+      image: ghcr.io/xu-cheng/texlive-small:latest
     needs: cleanup
     steps:
       - name: Checkout
