@@ -1,0 +1,40 @@
+\node[nmos](m1) at (0,-1) {M1};
+\draw (m1.drain) to [short,-] ++ (0,1)
+                 node[nmos,anchor=source](m2) {M2};
+
+\node[anchor=west] (x) at ($(m1.drain)!0.5!(m2.source)$) {X};
+
+\draw (m1.gate) to [short,-] ++ (-1,0) coordinate (im)
+                to [short,-] (im|-x) coordinate (g)
+                to [short,-] (m2.gate-|g)
+                to [short,-] (m2.gate);
+
+\draw (g) to [short,*-o] ++ (-1,0) coordinate (g)
+          node[anchor=east] {G};
+
+\draw (m2.drain) to [short,-o] ++ (0,1) coordinate (d)
+                 node[anchor=west] {D};
+
+\draw (m1.source) to [short,-o] ++ (0,-1) coordinate (s)
+                  node[anchor=west] {S};
+
+\path [voltarrow] ($(m1.gate)+(-0.2,-0.025)$) edge[bend left=-20] 
+    node[midway,left,font=\small,inner sep=2pt] 
+    {$V_{\mathrm{GS,1}}$} ($(m1.source)+(-0.025,-0.2)$);
+\path [voltarrow] ($(m2.gate)+(-0.2,-0.025)$) edge[bend left=-20] 
+    node[midway,left,font=\small,inner sep=2pt] 
+    {$V_{\mathrm{GS,2}}$} ($(m2.source)+(-0.025,-0.2)$);   
+\path [voltarrow] ($(g)+(0,-0.25)$) edge[bend left=-35] 
+    node[midway,left,font=\small,inner sep=2pt] 
+    {$V_{\mathrm{GS}}$} ($(s)+(-0.25,0)$);   
+
+\path [voltarrow] ($(m1.drain)+(0.6,0)$) edge[bend left=20] 
+    node[midway,right,font=\small,inner sep=2pt] 
+    {$V_{\mathrm{DS,1}}$} ($(m1.source)+(0.6,0)$);
+\path [voltarrow] ($(m2.drain)+(0.6,0)$) edge[bend left=20] 
+    node[midway,right,font=\small,inner sep=2pt] 
+    {$V_{\mathrm{DS,2}}$} ($(m2.source)+(0.6,0)$);
+
+\path [voltarrow] ($(d)+(1.6,0)$) edge[bend left=20] 
+    node[midway,right,font=\small,inner sep=2pt] 
+    {$V_{\mathrm{DS}}$} ($(s)+(1.6,0)$);
