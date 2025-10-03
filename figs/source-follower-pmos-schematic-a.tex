@@ -1,0 +1,17 @@
+\node[vdd] (vdd) at (0,0) {};
+\draw (vdd) to [ american current source
+               , l=$I_{\mathrm{0}}$
+               ] ++ (0,-1.25) 
+            to [short,-] ++ (0,-0.25) coordinate (x)
+            to [short,-] ++ (0,-0.25)
+            node [pmos,anchor=source] (m1) {};
+\draw (m1.drain) to [short,-] ++ (0,-0.25) coordinate (vss)
+                 node[vss] {};
+
+\draw (m1.gate) to [short,-o]  ++ (-0.25,0) node[left] {I};
+\draw (x)       to [short,*-o] ++ (1.0,0)   node[right] {O};    
+
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1.source)!0.5!(m1.drain)$) {M1};
