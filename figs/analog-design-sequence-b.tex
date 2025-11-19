@@ -1,12 +1,14 @@
-\node[ draw=black
-     , text width=2.7cm
-     , minimum size=1.2cm
-     , align=center
-     , rounded corners
-     , thick
-     , font=\Large
-     , fill=lightgray
-     ] (schematic) at (0,0) {Schematic};
+\tikzstyle{box} = [ draw=black
+                  , text width=2.7cm
+                  , minimum size=1.2cm
+                  , align=center
+                  , rounded corners
+                  , thick
+                  , fill=lightgray
+                  , font=\Large
+                  ]
+
+\node[box] (schematic) at (0,0) {Schematic};
 
 \node[anchor=east] (circuit) at (schematic.west) {
  \smartdiagram[sequence diagram]{Circuit Design}
@@ -16,24 +18,6 @@
  \smartdiagram[sequence diagram]{Layout Design}
 };
 
-\node[ draw=black
-     , text width=2.7cm
-     , minimum size=1.2cm
-     , align=center
-     , rounded corners
-     , thick
-     , font=\Large
-     , fill=lightgray
-     , anchor=west
-     ] at (layout.east) {Layout};
+\node[box, anchor=west] at (layout.east) {Layout};
 
-\node[ draw=black
-     , text width=2.7cm
-     , minimum size=1.2cm
-     , align=center
-     , rounded corners
-     , thick
-     , font=\Large
-     , fill=lightgray
-     , anchor=east
-     ] at (circuit.west) {Specification};
+\node[box, anchor=east] at (circuit.west) {Specification};
