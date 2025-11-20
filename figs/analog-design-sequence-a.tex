@@ -1,14 +1,14 @@
-\tikzstyle{box} = [ draw=black
-                  , text width=2.7cm
-                  , minimum size=1.2cm
-                  , align=center
-                  , rounded corners
-                  , thick
-                  , fill=lightgray
-                  , font=\Large
-                  ]
+\tikzstyle{anaflowbox} = [ draw=black
+                         , text width=2.7cm
+                         , minimum size=1.2cm
+                         , align=center
+                         , rounded corners
+                         , thick
+                         , fill=lightgray
+                         , font=\Large
+                         ]
 
-\node[box] (schematic) at (0,0) {Schematic};
+\node[anaflowbox] (schematic) at (0,0) {Schematic};
 
 \node[anchor=east] (circuit) at (schematic.west) {
  \smartdiagram[sequence diagram]{ Topology Selection
@@ -22,8 +22,8 @@
  \smartdiagram[sequence diagram]{$\hdots$}
 };
 
-\node[box, anchor=west] at (layout.east) {Layout};
-\node[box, anchor=east] at (circuit.west) {Specification};
+\node[anaflowbox, anchor=west] at (layout.east) {Layout};
+\node[anaflowbox, anchor=east] at (circuit.west) {Specification};
 
 \node[anchor=south, font=\large\bfseries] at (circuit.north) {Circuit Design};
 \node[anchor=south, font=\large\bfseries] at (layout.north) {Layout Design};

@@ -1,14 +1,19 @@
 \usepackage{tikz}
+  \usetikzlibrary{arrows.meta}
+  \usetikzlibrary{decorations.markings}
+  \usetikzlibrary{pgfplots.groupplots}
+  \usetikzlibrary{patterns}
+  \usetikzlibrary{decorations.pathmorphing}
+
 \usepackage{pgfplots}
 \usepackage{siunitx}
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{decorations.markings}
-\usetikzlibrary{pgfplots.groupplots}
-\usetikzlibrary{patterns}
-\usetikzlibrary{decorations.pathmorphing}
 
-
-\tikzstyle{pencildraw}=[decorate,decoration={random steps,segment length=1.5pt,amplitude=0.8pt}]
+\tikzstyle{pencildraw} = [ decorate
+                         , decoration={ random steps
+                                      , segment length=1.5pt
+                                      ,amplitude=0.8pt
+                                      }
+                         ]
 
 \usepackage{nicefrac}
 
@@ -49,7 +54,11 @@
 
 \ctikzset{inductor=american}
 
-\tikzstyle{voltarrow}=[-{Latex[round]},semithick,shorten <=3pt,shorten >=3pt]
+\tikzstyle{voltarrow} = [-{Latex[round]}
+                        , semithick
+                        , shorten <=3pt
+                        , shorten >=3pt
+                        ]
 
 \usepackage{amsmath}
 
