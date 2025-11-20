@@ -2,6 +2,7 @@
 
 REPO=https://github.com/mschweikardt/tikzlib/
 IOREPO=https://mschweikardt.github.io/tikzlib/
+RAWREPO=https://raw.githubusercontent.com/mschweikardt/tikzlib/
 
 rm -f *.pdf
 rm -f *.svg
@@ -33,9 +34,8 @@ for texfile in *.tex; do
   pdflatex --shell-escape $texfile
   cp $file.pdf ./../$file.pdf
   cp $file.png ./../$file.png
-  echo "      <dt><a href="${REPO}blob/main/figs/$texfile">$texfile</a></dt>" >> ./../index.html
+  echo "      <dt><a href="${RAWREPO}refs/heads/main/figs/$texfile">$texfile</a></dt>" >> ./../index.html
   echo "      <dd><img src= "$file.png" alt="$file" width="500"/></dd>" >> ./../index.html
-
 done
 
 rm -f *.pdf
