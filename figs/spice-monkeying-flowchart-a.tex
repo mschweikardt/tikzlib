@@ -1,0 +1,59 @@
+\node (start) [startstop] {Start};
+\node (in1) [ io
+            , below of=start
+            , yshift=0.3cm
+            ] {Specification};
+\node (pro1) [ manprocess
+             , below of=in1
+             , yshift=0.2cm
+             ] {pick most \\simple topology};
+\node (pro2) [ manprocess
+             , below of=pro1
+             ] {create \\ simulation setup};
+\node (sim) [ autoprocess
+            , right of=pro2
+            , xshift=1.7cm
+            ] {run\\simulation};
+\node (dec1) [ decision
+             , right of=sim
+             , xshift=1.5cm
+             , fill=orange!30
+             ] {Spec. met?};
+\node (inv) [ manprocess
+            , right of=dec1
+            , xshift=1.7cm
+            , text width=1.5cm
+            , minimum width=1.5cm
+            ] {Investigate};
+\node (chp) [ manprocess
+            , above of=dec1
+            , yshift=0.4cm
+            ] {change \\parameter(s)};
+\node (cht) [ manprocess
+            , above of=chp
+            ] {add/remove \\device(s)};
+\node (out1) [ io
+             , below of=dec1
+             , yshift=-0.2cm
+             ] {Output};
+\node (stop) [ startstop
+             , below of=out1
+             , yshift=0.3cm
+             ] {Stop};
+
+\draw [flowchartarrow] (start) -- (in1);
+\draw [flowchartarrow] (in1)   -- (pro1);
+\draw [flowchartarrow] (pro1)  -- (pro2);
+\draw [flowchartarrow] (pro2)  -- (sim);
+\draw [flowchartarrow] (sim)   -- (dec1);
+\draw [flowchartarrow] (dec1)  -- node[anchor=east] {yes} (out1);
+\draw [flowchartarrow] (dec1) -- (inv)node[midway,anchor=south] {no};
+\draw [flowchartarrow] (inv)  --++ (1.4,0) coordinate(x)
+                              --  (x|-chp) -- (chp);
+\draw [flowchartarrow] (x|-chp) -- (x|-cht) -- (cht);
+
+\draw [flowchartarrow] (chp) -- (chp-|sim) -- (sim);
+\draw [thick] (cht) -- (cht-|sim) -- (chp-|sim);
+
+\draw [flowchartarrow] (dec1) -- (out1);
+\draw [flowchartarrow] (out1) -- (stop);

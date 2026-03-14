@@ -1,0 +1,37 @@
+\useasboundingbox (-1.8,-2.3) rectangle (1.8,2.3);
+
+\tikzstyle{box} = [ draw=black
+                  , text width=1.2cm
+                  , minimum width=2cm
+                  , minimum height=1cm
+                  , align=center
+                  , rounded corners
+                  , thick
+                  , align=center
+                  ]
+\tikzstyle{arr} = [ -{Latex[round,scale=0.9]}
+                  , shorten >=1mm
+                  , shorten <=1mm
+                  , thick
+                  ]
+
+\node[box] (ex) at (0.75, 1.75) {existing tool(s)};
+
+\node[scale=2,inner sep=0pt] (designer) at (-1.25, 0) {\faUser};
+
+\node[box] (new) at (0.75,-1.75) {new tool};
+
+\draw[arr] ($(ex.south)-(0.2,0)$) coordinate (x) -- (new.north-|x);
+\draw[arr] ($(new.north)+(0.2,0)$) coordinate (x) -- (ex.south-|x);
+
+\coordinate (y) at ($(designer.north)-(0.2,0)$);
+\draw[arr] ($(ex.west)+(0,0.2)$) coordinate (x) -- (y|-x) -- (y);
+
+\coordinate (y) at ($(ex.west)-(0,0.2)$);
+\draw[arr] ($(designer.north)+(0.2,0)$) coordinate (x)-- (y-|x) -- (y);   
+
+\coordinate (y) at ($(designer.south)+(0.2,0)$);
+\draw[arr] ($(new.west)+(0,0.2)$) coordinate (x) -- (y|-x) -- (y);
+
+\coordinate (y) at ($(new.west)-(0,0.2)$);
+\draw[arr] ($(designer.south)-(0.2,0)$) coordinate (x)-- (y-|x) -- (y);

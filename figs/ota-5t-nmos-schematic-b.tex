@@ -1,0 +1,77 @@
+\newcommand\diffpairdist{3}
+
+\coordinate (cm) at (0,0);
+
+\draw (cm) to [R,l_=$R_{\mathrm{S}}$]  ++ (-\diffpairdist/2,0) 
+           to [short,-]  ++ (0,0.25) 
+           node [nmos,anchor=source] (m1a) {};
+
+\draw (m1a.gate) to [short,-o] ++ (-0.05,0) node[anchor=east] {INP};
+
+\draw (cm) to [R,l=$R_{\mathrm{S}}$]  ++ (\diffpairdist/2,0) coordinate (x)
+           to [short,-]  (x|-m1a.source)
+           node [nmos,anchor=source,xscale=-1] (m1b) {};
+
+\draw (m1b.gate) to [short,-o] ++ (0.05,0) node[anchor=west] {INN};
+
+\draw (m1b.drain) to [short,-] ++ (0,0.5) coordinate (oi)
+                  to [short,-] ++ (0,0.5) 
+                  node [pmos,anchor=drain] (m2b) {};
+
+\draw (m1a.drain) to [short,-] (m1a.drain|-m2b.drain)
+                    node [pmos,anchor=drain,xscale=-1] (m2a) {};  
+
+\draw (m2a.drain) to [short,*-] (m2a.drain-|m2a.gate)
+                     to [short,-*] (m2a.gate)
+                     to [short,-] (m2b.gate);
+
+\draw (m2a.source) to [short,-] (m2a.source-|cm) coordinate (vdd)
+                      to [short,*-] (m2b.source);
+
+\node[vdd] at (vdd) {};
+
+\draw (cm) to [short,*-] ++ (0,-0.5)
+           node [nmos,anchor=drain] (m3a) {};
+\draw (m3a.gate) to [short,-] (m1a.gate|-m3a.gate)
+                 to [short,-] ++ (-1,0)
+                 node [nmos,anchor=gate,xscale=-1] (m3r) {}
+                 to [short,*-] (m3r.gate|-m3r.drain)
+                 to [short,-*] (m3r.drain)
+                 to [short,-o,f<=$I_{\mathrm{0}}$] ++ (0,1)
+                 node [anchor=south] {B} coordinate(b) ;
+
+\coordinate (vss) at ($(m3a.source)!0.5!(m3r.source)$);
+\draw (m3a.source) to [short,-*] (vss)
+                   to [short,- ] (m3r.source);
+
+\draw (oi) to [short,*-o] ++ (1.75,0) node[above] {O}
+           to [short, - ] ++ (0.75,0) coordinate (x)
+           to [C,-,l=$C_{\mathrm{L}}$] (x|-vss)
+           node[vss] {}; 
+
+\node[vss] at (vss) {};
+
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1a.source)!0.775!(m1a.drain)$) {MND1A};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1b.source)!0.775!(m1b.drain)$) {MND1B};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m2b.drain)!0.775!(m2b.source)$) {MNCM2A};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m2a.drain)!0.775!(m2a.source)$) {MNCM2R};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m3r.source)!0.775!(m3r.drain)$) {MNCM3R};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m3a.source)!0.775!(m3a.drain)$) {MNCM3A};

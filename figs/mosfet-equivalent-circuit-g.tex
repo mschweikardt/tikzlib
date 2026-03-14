@@ -1,0 +1,33 @@
+\node[nfet](mos) at (0,0) {};
+\node[]() at (0.2,0.2) {$M_{\mathrm{i}}$};
+
+\draw (mos.drain) to [short,- ] ++ (0,0.5) coordinate (draindiode)
+                  to [short,- ] ++ (0,1.5) coordinate (c)
+                  to [short,-o] ++ (0,1)   node[right] (d2) {$D'$}
+                  to [R,l_=$R_{\mathrm{D}}$,-o] ++ (0,2) node[right] (d) {$D$};
+
+\draw (mos.source) to [short,- ]  ++ (0,-0.5) coordinate (sourcediode)
+                   to [short,-o]  ++ (0,-1)   node[right] (s2) {$S'$}
+                   to [R,l=$R_{\mathrm{S}}$,-o] ++ (0,-2) node[right] (s) {$S$};
+
+\draw (mos.bulk) to [short,-] ++ (2,0) coordinate (b)
+                 to [short,-] (draindiode-|b)
+                 to [D,-*,l_=$D_{\mathrm{DB,j}}$] (draindiode);
+
+\draw (b) to [short,*-] (sourcediode-|b)
+          to [D,-*,l=$D_{\mathrm{SB,j}}$] (sourcediode);
+
+\draw (mos.gate) to [short,-*] ++ (-1,0) coordinate (g)
+                 to [short,-] (g|-draindiode) coordinate (x)
+                 to [C,l=$C_{\mathrm{GDO}}$] (draindiode);
+
+\draw (g) to [short,-] (g|-sourcediode)
+          to [C,l_=$C_{\mathrm{GSO}}$] (sourcediode); 
+
+\draw (x) to [short,*-] (x|-c) coordinate (x)
+          to [C,l=$C_{\mathrm{GBO}}$] (x-|c)
+          to [short,-] (x-|b)
+          to [short,-*] (b|-draindiode);
+
+\draw (g) to [short,-o] ++ (-0.75,0) node[left] {$G$};
+\draw (b) to [short,-o] ++ ( 0.75,0) node[right] {$B$};

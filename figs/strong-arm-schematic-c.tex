@@ -1,0 +1,117 @@
+\newcommand\diffpairdist{3}
+\newcommand\clkpinlen{0.25}
+\node [nmos] (m7) at (0,0) {}; 
+\draw (m7.gate) to [short,-o] ++ (-\clkpinlen,0) node[anchor=east] {C};
+\node[vss] at (m7.source) {};
+
+\draw (m7.drain) to [short,-*] ++ (0,0.1) coordinate (cm)
+                 to [short,-] ++ (-\diffpairdist/2,0) 
+                 to [short,-] ++ (0,0.1)
+                 node[nmos,anchor=source] (m1) {}; 
+
+\draw (cm) to [short,-] ++ (\diffpairdist/2,0) coordinate (im)
+           to [short,-] (im|-m1.source)
+           node[nmos,anchor=source,xscale=-1] (m2) {}; 
+
+\draw (m1.gate) to [short,-o] ++ (-0.25,0) node[anchor=east] {INP};
+\draw (m2.gate) to [short,-o] ++ ( 0.25,0) node[anchor=west] {INN};  
+
+\draw (m1.drain) to [short,-*] ++ (0,0.1) coordinate (x)
+                 to [short,- ] ++ (0,0.4) 
+                 node[nmos,anchor=source,xscale=-1] (m3) {}; 
+\draw (m2.drain) to [short,-*] (m2.drain|-x) coordinate (y)
+                 to [short,- ] (m3.source-|m2.drain) 
+                 node[nmos,anchor=source] (m4) {}; 
+
+\draw (m3.drain) to [short,-o] ++ (0,0.6) coordinate (on)
+                 to [short,- ] ++ (0,0.6) 
+                 node[pmos,anchor=drain,xscale=-1] (m5) {};
+\draw (m3.gate) to [short,-] (m5.gate);
+
+\draw (m4.drain) to [short,-o] (m4.source|-on) coordinate (op)
+                 to [short,- ] (m5.drain-|m4.source) 
+                 node[pmos,anchor=drain] (m6) {}; 
+\draw (m4.gate) to [short,-] (m6.gate);
+
+\node[anchor=east] at (on) {OUTN};
+\node[anchor=west] at (op) {OUTP};
+
+\coordinate (im) at ($(m3.drain)!0.1!(on)$);
+\draw (im) to [short,*-*] (im-|m4.gate); 
+
+\coordinate (im) at ($(m6.drain)!0.1!(op)$);
+\draw (im) to [short,*-*] (im-|m3.gate); 
+
+\draw (im) to [short,-] ++ (1.5,0) coordinate (im)
+           to [short,-] (im|-m6.drain)
+           node[pmos,anchor=drain,xscale=-1] (m8) {};
+
+\coordinate (im) at ($(m5.drain)!0.1!(on)$);
+\draw (im) to [short,*-] ++ (-1.5,0) coordinate (im)
+           to [short,-] (im|-m5.drain)
+           node[pmos,anchor=drain] (m9) {}; 
+
+\coordinate (vdd) at ($(m5.source)!0.5!(m6.source)$);
+\node[vdd] at (vdd) {};
+
+\draw (m9.source) to [short,-*] (m5.source)
+                  to [short,-*] (vdd)
+                  to [short,-*] (m6.source)
+                  to [short,- ] (m8.source);
+
+\draw (m9.source) to [short,-] ++ (-1.5,0)
+                  node[pmos,anchor=source] (m10) {}; 
+\draw (m9.gate) to [short,-] (m10.gate)
+                to [short,-o] ++ (-\clkpinlen,0) node[anchor=east] {C};
+\draw (m10.drain) -- (m10.drain|-x) -- (x);
+
+\draw (m8.source) to [short,-] ++ (1.5,0)
+                  node[pmos,anchor=source,xscale=-1] (m11) {}; 
+\draw (m8.gate) to [short,-] (m11.gate)
+                to [short,-o] ++ (\clkpinlen,0) node[anchor=west] {C};       
+\draw (m11.drain) -- (m11.drain|-y) -- (y);
+
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1.source)!0.775!(m1.drain)$) {M1};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m2.source)!0.775!(m2.drain)$) {M2};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m3.source)!0.775!(m3.drain)$) {M3};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m4.source)!0.775!(m4.drain)$) {M4};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m5.drain)!0.775!(m5.source)$) {M5};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m6.drain)!0.775!(m6.source)$) {M6};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m7.source)!0.775!(m7.drain)$) {M7};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m8.drain)!0.775!(m8.source)$) {M8};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m9.drain)!0.775!(m9.source)$) {M9};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m10.drain)!0.775!(m10.source)$) {M10};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m11.drain)!0.775!(m11.source)$) {M11};

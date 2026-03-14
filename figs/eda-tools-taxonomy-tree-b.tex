@@ -1,0 +1,28 @@
+\tikzset{level distance=15mm}
+\tikzset{level 1/.style={sibling distance=85mm}}  
+\tikzset{level 2/.style={sibling distance=60mm}}  
+\tikzset{level 3/.style={sibling distance=12mm}}  
+
+\node {tool}
+  child[level distance=5mm] {node {manual}
+    child[sibling distance=15mm, level distance=30mm] 
+      {node[align=center] {text\\editor}}
+    child[sibling distance=15mm, level distance=30mm]
+      {node[align=center] {schematic\\editor}}
+    child[sibling distance=15mm, level distance=30mm]
+      {node[align=center] {layout\\editor}}
+  }
+  child[level distance=5mm] {node {automatic}
+    child[level distance=15mm] {node[left=1mm] {analysis}
+      child[sibling distance=11mm] {node {simulator}}
+      child[sibling distance=8mm] {node {DRC}}
+      child[sibling distance=8mm] {node {LVS}}
+      child[sibling distance=8mm] {node {STA}}
+    }
+    child[level distance=15mm] {node[left=10mm] {synthesis}
+      child[sibling distance=15mm] {node[align=center] {PCell}}
+      child[sibling distance=14mm] {node[align=center] {optimizer}}
+      child[sibling distance=12mm] {node[align=center] {placer}}
+      child[sibling distance=12mm] {node[align=center] {router}}
+  }
+};

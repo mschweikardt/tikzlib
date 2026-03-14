@@ -1,0 +1,11 @@
+\draw (0,0) coordinate (a) to [short,o-*] ++ (0.75,0) coordinate (ai)
+                           to [C,-,l=$C$] ++ (3,0) coordinate (bi)
+                           to [short,*-o] ++ (0.75,0) coordinate (b);
+
+\draw (ai) to [C,-,l=$C_{\mathrm{P,B}}$] ++ (0,-2)
+           node[sground] {};
+\draw (bi) to [C,-,l_=$C_{\mathrm{P,T}}$] ++ (0,-2)
+           node[sground] {};
+
+\node[anchor=east] at (a) {B};
+\node[anchor=west] at (b) {T}; 

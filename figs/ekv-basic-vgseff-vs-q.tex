@@ -1,0 +1,36 @@
+% based on Ch. 2 of "Systematic Design of Anlog Integrated Circuits: 
+% Using Pre-Computed Lookup Tables" by Paul G.A. Jespers and Boris Murmann
+\begin{axis}[ xlabel=$q$ %normalized mobile charge density
+            , ylabel=$\frac{V_{\mathrm{GS}}-V_{\mathrm{TH}}}{nV_{\mathrm{T}}}$ % normalized drain current
+            , xmode=log
+            , xmin=0.01
+            , xmax=100
+            , ymin=-10
+            , ymax=40
+            , grid=both
+            , width= 12cm
+            , extra x ticks={0.2,5}
+            , extra x tick labels={0.2,5}
+            ]
+
+  \addplot[ mark=none
+          , domain=0.01:60
+          , samples=50
+          , smooth
+          , thick] {2*(x-1)+ln(x)}; 
+
+  \draw[dashed] (axis cs:0.2,-10) -- (axis cs:0.2,40);
+  \draw[dashed] (axis cs:5.0,-10) -- (axis cs:5.0,40);
+
+  \draw[{Latex[round,scale=0.9]}-]
+    (axis cs:2,2.71) -- (axis cs:0.8,10)
+    node[ anchor=south
+        , fill=white
+        , inner sep=1pt
+        , align=center
+        ] {$2(q-1)+\ln q$};
+
+  \node[fill=white] at (axis cs:1,38)     {moderate (M.I.)};
+  \node[fill=white] at (axis cs:22,38)    {strong (S.I.)};
+  \node[fill=white] at (axis cs:0.045,38) {weak (W.I.)};
+\end{axis}

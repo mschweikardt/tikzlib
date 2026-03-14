@@ -1,0 +1,29 @@
+\node[transformer core] (tf1) at (0, 1.75) {};
+\node[transformer core, anchor=B1] (tf2) at ($(tf1.B2)+(0,-1)$) {};
+
+\node[] () at (tf1.base) {2:1};
+\node[] () at (tf2.base) {2:1};
+
+\draw (tf1.A1) to [short,-o] ++ (-1.3,0) coordinate(D) node[anchor=east] {D};
+
+\draw (tf1.B2) to [short,-] (tf2.B1);
+
+\coordinate (x) at ($(tf1.B2)!0.5!(tf2.B1)$);
+
+\draw (x) to [short,*-] ++ (0.5,0) coordinate (x)
+          to [short,-]     (x|-tf2.B2)
+          to [short,-]  ++ (0,-0.75) coordinate (x)
+          to [short,-o] (x-|D) coordinate(C) node[anchor=east] {C};
+
+\draw (tf1.B1) to [short,-o] ++ (1,0) node[anchor=west] {P};
+\draw (tf2.B2) to [short,-o] ++ (1,0) node[anchor=west] {N};
+
+
+\draw (tf1.A2) to [short,- ] ++ (-1,-1) coordinate (x)
+               to [short,-*] (x|-tf2.A2) coordinate (gnd)
+               to [short,- ] (tf2.A2);
+
+\draw (tf2.A1) to [short,- ] ++ (-1,1) coordinate (x)
+               to [short,-*] (x|-tf1.A1);
+
+\node[sground] () at (gnd) {};

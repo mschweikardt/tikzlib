@@ -1,0 +1,100 @@
+
+\newcommand\diffpairdist{3}
+
+\coordinate (cm) at (0,0);
+
+\draw (cm) to [short,-]  ++ (-\diffpairdist/2,0) 
+           to [short,-]  ++ (0,0.25) 
+           node [nmos,anchor=source] (m1a) {};
+
+\draw (m1a.gate) to [short,-o] ++ (-0.05,0) node[anchor=east] {INP};
+
+\draw (cm) to [short,-]  ++ (\diffpairdist/2,0) coordinate (x)
+           to [short,-]  (x|-m1a.source)
+           node [nmos,anchor=source,xscale=-1] (m1b) {};
+
+\draw (m1b.gate) to [short,-o] ++ (0.05,0) node[anchor=west] {INN};
+
+\draw (m1b.drain) to [short,-*] ++ (0,0.75) coordinate (i)
+                  to [short,- ] ++ (0,1.00) 
+                  node [pmos,anchor=drain] (m2b) {};
+
+\draw (m1a.drain) to [short,-] (m1a.drain|-m2b.drain)
+                    node [pmos,anchor=drain,xscale=-1] (m2a) {};  
+
+\draw (m2a.drain) to [short,*-] (m2a.drain-|m2a.gate)
+                     to [short,-*] (m2a.gate)
+                     to [short,-] (m2b.gate);
+
+\draw (m2a.source) to [short,-] (m2a.source-|cm) coordinate (vdd)
+                      to [short,*-] (m2b.source);
+
+\node[vdd] at (vdd) {};
+
+\draw (cm) to [short,*-] ++ (0,-0.5)
+           node [nmos,anchor=drain] (m3a) {};
+\draw (m3a.gate) to [short,-] (m1a.gate|-m3a.gate)
+                 to [short,-] ++ (-1,0)
+                 node [nmos,anchor=gate,xscale=-1] (m3r) {}
+                 to [short,*-] (m3r.gate|-m3r.drain)
+                 to [short,-*] (m3r.drain)
+                 to [short,-o,f<=$I_{\mathrm{0}}$] ++ (0,1)
+                 node [anchor=south] {B} coordinate(b) ;
+
+\draw (m3a.source) to [short,- ] (m3r.source);
+
+\node[vss] at (m3a.source) {};
+
+\draw (m2b.drain) to [short,*-] ++ (2.5,0)
+                  node [pmos,anchor=gate] (mpcs) {};  
+
+\draw (mpcs.source) to [short,- ] (mpcs.source|-m2b.source)
+                    to [short,-*] (m2b.source);
+
+\draw (i) to [R,l_=$R$] ++ (1.25,0)
+          to [C,l_=$C$] (i-|mpcs.drain) coordinate (oi)
+          to [short,*-] (mpcs.drain-|oi);
+
+\draw (oi) to [short,-] (oi|-m3a.drain)
+           node [nmos,anchor=drain] (m3b) {};  
+
+\draw (m3b.gate) -- (m3a.gate);
+\draw (m3b.source) to [short,-*] (m3a.source);
+
+\draw (oi) to [short,*-o] ++ (1.75,0) node[above] {O}
+           to [short, - ] ++ (0.75,0) coordinate (x)
+           to [C,-,l=$C_{\mathrm{L}}$] (x|-m3a.source)
+           node[vss] {}; 
+
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1a.source)!0.775!(m1a.drain)$) {MND1A};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m1b.source)!0.775!(m1b.drain)$) {MND1B};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m2b.drain)!0.775!(m2b.source)$) {MPCM2A};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m2a.drain)!0.775!(m2a.source)$) {MPCM2R};
+\node[ anchor    = east
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m3r.source)!0.775!(m3r.drain)$) {MNCM3R};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m3a.source)!0.775!(m3a.drain)$) {MNCM3A};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(m3b.source)!0.775!(m3b.drain)$) {MNCM3B};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mpcs.drain)!0.775!(mpcs.source)$) {MPCS};

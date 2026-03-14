@@ -1,0 +1,23 @@
+\tikzstyle{anaflowbox} = [ draw=black
+                         , text width=2.7cm
+                         , minimum size=1.2cm
+                         , align=center
+                         , rounded corners
+                         , thick
+                         , fill=lightgray
+                         , font=\Large
+                         ]
+
+\node[anaflowbox] (schematic) at (0,0) {Schematic};
+
+\node[anchor=east] (circuit) at (schematic.west) {
+ \smartdiagram[sequence diagram]{Circuit Design}
+};
+
+\node[anchor=west] (layout) at (schematic.east) {
+ \smartdiagram[sequence diagram]{Layout Design}
+};
+
+\node[anaflowbox, anchor=west] at (layout.east) {Layout};
+
+\node[anaflowbox, anchor=east] at (circuit.west) {Specification};

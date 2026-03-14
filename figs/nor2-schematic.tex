@@ -1,0 +1,59 @@
+\node [pmos] (mp1) at (0,0) {}; 
+
+\draw (mp1.drain) to [short,-] ++ (0,-0.75)
+                  node[ pmos
+                      , anchor=source
+                      ] (mp2) {};
+\draw (mp2.drain) to [short,-*] ++ (0,-0.75) coordinate (x)
+                  to [short,- ] ++ (-2,0)
+                  to [short,- ] ++ (0 ,-0.75)
+                  node[ nmos
+                      , anchor=drain
+                      ] (mn1) {};
+
+\draw (x) to [short,-] ++ (2 ,0) coordinate (x)
+          to [short,-] (x|-mn1.drain)
+          node[ nmos
+              , anchor=drain
+              ] (mn2) {};   
+
+\draw (x) to [short,*-o] ++ (1 ,0) coordinate (o);
+
+\draw (mn2.gate) to [short,- ] (mn2.gate-|mp2.gate)
+                 to [short,-*] (mp2.gate)
+                 to [short,- ] (mp2.gate-|mn1.gate)
+                 to [short,-o] ++ (-0.75,0) coordinate (a);
+
+\draw (mn1.gate) to [short,- ] (mn1.gate|-mp1.gate) coordinate (x)
+                 to [short,- ] (mp1.gate);
+
+\draw (x) to [short,*-o] (x-|a) coordinate (b);
+
+\draw (mn1.source) to [short,- ] ++ (0,-0.75) coordinate (x)
+                   to [short,-*] (x-|mp1.source) coordinate (vss)
+                   to [short,- ] (vss-|mn2.source)
+                   to [short,- ] (mn2.source);
+
+\node[anchor=east] at (a) {B};
+\node[anchor=east] at (b) {A};
+\node[anchor=west] at (o) {O};
+
+\node[vdd] at (mp1.source) {};
+\node[vss] at (vss) {};
+
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mn1.source)!0.775!(mn1.drain)$) {MN1};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mn2.source)!0.775!(mn2.drain)$) {MN2};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mp1.drain)!0.775!(mp1.source)$) {MP1};
+\node[ anchor    = west
+     , inner sep = 2pt
+     , font      = \footnotesize
+     ] () at ($(mp2.drain)!0.775!(mp2.source)$) {MP2};

@@ -1,0 +1,17 @@
+\draw (0,0) coordinate (at) to [short,o-*] ++ (0.75,0) coordinate (ait)
+                            to [R,-,l=$\nicefrac{R}{2}$] ++ (2.5,0) coordinate (mt)
+                            to [R,-,l=$\nicefrac{R}{2}$] ++ (2.5,0) coordinate (bit)
+                            to [short,*-o] ++ (0.75,0) coordinate (bt);
+
+\draw (ait) to [C, - ,l=$C_{\mathrm{P,1}}$] ++ (0,-2)   coordinate (aib);
+\draw (bit) to [C, - ,l_=$C_{\mathrm{P,1}}$] (aib-|bit) coordinate (bib);
+\draw (mt)  to [C,*-*,l_=$C_{\mathrm{P,2}}$] (mt|-bib) coordinate (mb);
+
+\draw (aib) to [short,-o] (aib-|at)  coordinate (sbl); 
+\draw (aib) to [short,*-*] (bib)
+            to [short, -o] (bib-|bt) coordinate (sbr); 
+
+\node[anchor=east] at (at) {A};
+\node[anchor=west] at (bt) {B}; 
+\node[anchor=east] at (sbl) {S};
+\node[anchor=west] at (sbr) {S}; 

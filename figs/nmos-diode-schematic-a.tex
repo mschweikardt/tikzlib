@@ -1,0 +1,18 @@
+\node[nmos](m1) at (0,0) {};
+
+\draw (m1.gate) to [short,- ] (m1.gate|-m1.drain)
+                to [short,-*] (m1.drain)
+                to [ american current source
+                   , l=$I_{\mathrm{0}}$
+                   , invert
+                   ] ++ (0,2)
+                node[vdd] {};
+
+\node[vss] at (m1.source) {};
+
+\path [voltarrow] ($(m1.drain)+(0.15,0)$) edge[bend left=20] 
+    node[midway,right,font=\small,inner sep=2pt] 
+    {$V_{\mathrm{DS}}$} ($(m1.source)+(0.15,0)$);
+\path [voltarrow] ($(m1.gate)+(-0.05,-0.05)$) edge[bend left=-20] 
+    node[midway,left,font=\small,inner sep=2pt] 
+    {$V_{\mathrm{GS}}$} ($(m1.source)+(-0.025,-0.1)$);

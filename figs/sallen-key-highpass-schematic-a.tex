@@ -1,0 +1,23 @@
+\node[op amp, yscale=-1,scale=0.8] (op) at (0,0) {};
+
+\draw (op.out) to [short,*-] (op.out|-op.north)
+               to [short, -] ++ (0,-0.2) coordinate (x)
+               to [short, -] (x-|op.-)
+               to [short, -] (op.-);
+
+\draw (op.+) to [short, -] ++ (-1,0) coordinate (y)
+             to [R,l_=$R_{\mathrm{2}}$] ++ (0,-2)
+             node[sground,scale=0.7] {};
+
+\draw (y) to [C,l_=$C_{\mathrm{2}}$,*-*] ++ (-2,0) coordinate (x);
+\draw (x) to [C,l_=$C_{\mathrm{1}}$,*-o] ++ (-2,0) coordinate (in)
+          node[anchor=east] {I};
+
+\draw (x) to [short, -] ++ (0,1)  coordinate (im)   
+          to [R,l=$C_{\mathrm{1}}$] (im-|op.out)
+          to [short,- ] (op.out)
+          to [short,-o] ++ (0.5,0)
+          node[anchor=west] {O};
+
+\node[anchor=north] at (x) {X};
+\node[anchor=south] at (y) {Y};

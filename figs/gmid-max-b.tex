@@ -1,0 +1,60 @@
+\begin{axis}[ xlabel=$T$ in \si{\celsius}
+            , ylabel=$\nicefrac{g_{\mathrm{m}}}{I_{\mathrm{D}}}|_{\mathrm{max}}$ in \si{\per\volt}
+            , xmin=-40
+            , xmax=140
+            , ymin=15
+            , ymax=50
+            , grid=both
+            , width=9cm
+            ]
+
+  \tikzstyle{plotprop} = [ mark=none
+                         , domain=-40:140
+                         , samples=20
+                         , smooth
+                         , thick
+                         ]
+  \tikzstyle{annonode} = [ fill=white
+                         , inner sep=1pt
+                         ]
+
+  \def \echarge {1.602e-19}
+  \def \kboltz {1.38064852e-23}
+  \def \tkelvin {273.15}
+
+  \addplot[plotprop] {\echarge/(\kboltz*1.0*(\tkelvin+\x))};
+  \node[ annonode
+       , anchor =south west
+       , rotate=-26
+       ] at (axis cs:-20,30.6) {$n=1.0$};
+
+  \addplot[plotprop] {\echarge/(\kboltz*1.1*(\tkelvin+\x))};
+  \node[ annonode
+       , anchor =south west
+       , rotate=-28
+       ] at (axis cs:-20,32.8) {$n=1.1$};
+
+  \addplot[plotprop] {\echarge/(\kboltz*1.2*(\tkelvin+\x))};
+  \node[ annonode
+       , anchor =south west
+       , rotate=-30
+       ] at (axis cs:-20,35.4) {$n=1.2$};
+
+  \addplot[plotprop] {\echarge/(\kboltz*1.3*(\tkelvin+\x))};
+  \node[ annonode
+       , anchor =south west
+       , rotate=-32
+       ] at (axis cs:-20,38.5) {$n=1.3$};
+
+  \addplot[plotprop] {\echarge/(\kboltz*1.4*(\tkelvin+\x))};
+  \node[ annonode
+       , anchor =south west
+       , rotate=-33
+       ] at (axis cs:-20,42) {$n=1.4$};
+
+  \addplot[plotprop] {\echarge/(\kboltz*1.5*(\tkelvin+\x))}; 
+  \node[ annonode
+       , anchor =south west
+       , rotate=-35
+       ] at (axis cs:-20,46) {$n=1.5$};
+\end{axis}

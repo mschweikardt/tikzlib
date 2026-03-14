@@ -1,0 +1,69 @@
+% DOI: 10.1109/TPEL.2017.2771942
+% LTTC:Logic-Threshold Triggered Comparator
+\coordinate (origin) at (0,0);
+\node[nmos,anchor=drain,font=\footnotesize] (m2) at (origin) {M2};
+\node[pmos,anchor=drain,font=\footnotesize] (m1) at (origin) {M1};    
+
+\draw (origin) to [short,- ] (origin-|m2.gate) to [short,-] (m2.gate);
+\draw (origin) to [short,-*] (origin-|m1.gate) to [short,-] (m1.gate);
+
+\draw (origin) to [short,*-] ++ (0.65,0) coordinate (ref2)
+               to [short,o-] ++ (0.65,0) coordinate (im)
+               to [short,- ] (im|-m1.gate)
+               node[pmos,anchor=gate,font=\footnotesize] (m3) {M3};
+
+\node[nmos,anchor=drain,font=\footnotesize] (m4) at (m3.drain) {M5};
+\draw (m4.gate) to [short,-*] (im);
+
+\draw (m3.drain) to [short,*-] ++ (0.5,0) coordinate (x)
+                 to [short,o-] ++ (0.5,0) coordinate (im)
+                 to [short,- ] (im|-m1.gate)
+                 node[pmos,anchor=gate,font=\footnotesize] (m5) {M5};
+
+\node[nmos,anchor=drain,font=\footnotesize] (m6) at (m5.drain) {M6};
+\draw (m6.gate) to [short,-*] (im);
+
+\draw (m6.drain) to [short,*-] ++ (0.5,0) coordinate (y)
+                 to [short,o-] ++ (0.5,0) 
+                 node[not port,anchor=in] (inv1) {};
+\draw (inv1.out) to [short,-] ++ (0,0) 
+                 node[not port,anchor=in] (inv2) {};
+
+\draw (inv2.out) to [short,-o] ++ (0.6,0) coordinate (updn)
+                 to [short,- ] ++ (0.9,0)  coordinate (im)
+                 to [short,- ] ++ (0,-0.75) 
+                 to [short,- ] ++ (0.3,0) 
+                 node[not port,anchor=in] (invlb) {};  
+
+\draw (im) to [short,*-] ++ (0,0.75)
+           to [short,-] ++ (0.3,0) 
+           node[not port,anchor=out,xscale=-1] (invlt) {}; 
+
+\draw (invlb.out) to [short,-] ++ (0.3,0) coordinate (im2)
+                  to [short,-] (im2|-invlt.in)
+                  to [short,-] (invlt.in);
+\draw [ thick
+      , decoration={brace, mirror}
+      , decorate
+      ] ($(im|-m2.source)+(-0.1,0)$) -- ($(im2|-m2.source) +(0.1,0)$) 
+      node [pos=0.5,anchor=north] {latch}; 
+
+
+\draw (m1.source) to [short,-o] ++ (0,0.3) coordinate (ref);
+
+\draw (m3.source) to [short,-] (m5.source);
+
+\coordinate (im) at ($(m1.source)!0.75!(m5.source)$);
+
+\draw (im) to [short,*-o] (im|-ref) coordinate (in);
+
+\node[anchor=south] at (ref) {REF}; 
+\node[anchor=south] at (in) {IN}; 
+\node[anchor=south] at (ref2) {REF'}; 
+\node[anchor=south] at (x) {X}; 
+\node[anchor=south] at (y) {Y}; 
+\node[anchor=south] at (updn) {UP\_DN}; 
+
+\node[vss] at (m2.source) {};
+\node[vss] at (m4.source) {};
+\node[vss] at (m6.source) {};

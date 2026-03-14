@@ -1,0 +1,68 @@
+% based on Ch. 2 of "Systematic Design of Anlog Integrated Circuits: 
+% Using Pre-Computed Lookup Tables" by Paul G.A. Jespers and Boris Murmann
+\begin{axis}[ xlabel=$q$ %normalized mobile charge density
+            , ylabel=$\mathrm{IC}\equal\nicefrac{I_{\mathrm{D}}}{I_{\mathrm{S}}}$ % normalized drain current
+            , xmode=log
+            , ymode=log
+            , xmin=0.01
+            , xmax=100
+            , ymin=0.001
+            , ymax=1000
+            , grid=both
+            , width= 12cm
+            , extra x ticks={0.2,5}
+            , extra x tick labels={0.2,5}
+            ]
+
+  \addplot[ mark=none
+          , domain=0.01:60
+          , samples=50
+          , smooth
+          , thick] {x^2+x}; 
+
+  \addplot[ mark=none
+          , domain=0.03:30
+          , samples=50
+          , smooth
+          ] {x^2}; 
+
+  \addplot[ mark=none
+          , domain=0.01:100
+          , samples=2
+          , smooth
+          ] {x}; 
+
+  \draw[dashed] (axis cs:0.2,0.001) -- (axis cs:0.2,1000);
+  \draw[dashed] (axis cs:5.0,0.001) -- (axis cs:5.0,1000);
+
+  \draw[{Latex[round,scale=0.9]}-]
+    (axis cs:0.3,0.09) -- (axis cs:0.4,0.02)
+    node[ anchor=north
+        , fill=white
+        , inner sep=1pt
+        , text width=1.2cm
+        , align=center
+        ] {$\mathrm{IC}\equal q^2$ \\ drift};
+
+  \draw[{Latex[round,scale=0.9]}-]
+    (axis cs:10,10) -- (axis cs:13,3)
+    node[ anchor=north
+        , fill=white
+        , inner sep=1pt
+        , text width=1.2cm
+        , align=center
+        ] {$\mathrm{IC}\equal q$ \\ diffusion};
+
+  \draw[{Latex[round,scale=0.9]}-]
+    (axis cs:1,2) -- (axis cs:0.75,15)
+    node[ anchor=south
+        , fill=white
+        , inner sep=1pt
+        , text width=2.3cm
+        , align=center
+        ] {$\mathrm{IC}\equal q^2+q$ \\ drift+diffusion};
+
+  \node[fill=white] at (axis cs:1,600)     {moderate (M.I.)};
+  \node[fill=white] at (axis cs:22,600)    {strong (S.I.)};
+  \node[fill=white] at (axis cs:0.045,600) {weak (W.I.)};
+\end{axis}

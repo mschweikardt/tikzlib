@@ -1,0 +1,22 @@
+\fill[pattern=north west lines, pattern color=gray] (-2, 1) rectangle (2, 2);
+\fill[pattern=north west lines, pattern color=gray] (-2,-1) rectangle (2,-2);
+\draw[thick] (-2, 1) -- (2, 1);
+\draw[thick] (-2,-1) -- (2,-1);
+\node[anchor=west] at (2,-1) {$E_{\mathrm{V}}$};
+\node[anchor=west] at (2, 1) {$E_{\mathrm{C}}$};
+
+\node[fill=white,inner sep=1.2pt] at (0,-1.5) {Valence band};
+\node[fill=white,inner sep=1.2pt] at (0, 1.5) {Conduction band};
+
+\draw[{Latex[round,scale=0.8]}-{Latex[round,scale=0.8]},semithick] 
+  (1,1) -- (1,-1) node[ midway
+                      , anchor=west
+                      , inner sep=1.5pt
+                      ] () {$E_{\mathrm{g}}$};
+
+\draw[-{Latex[round]},semithick] 
+  (-2.25,-1.75) -- (-2.25,1.75) node[ midway
+                                    , rotate=90
+                                    , anchor=south
+                                    , inner sep=1.5pt
+                                    ] () {Electron energy};
