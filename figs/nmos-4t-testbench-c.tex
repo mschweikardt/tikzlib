@@ -3,7 +3,7 @@
 
 \draw (mos.source) to [short,-]  ++ (0,-0.1)   coordinate(vsplus)
                    to [ V
-                      , i_=$i_{\mathrm{S}}(t)$
+                      , i_=$i_{\mathrm{S}}$
                       ]          ++ (0,-2.5)   coordinate(gnd);
 
 \node[ground] () at (gnd) {};
@@ -13,7 +13,7 @@
 \draw (mos.bulk) to [short,-]   (vsplus|-mos.bulk)
                  to [short,-o]  ++ (2,0)        coordinate (vbplus)
                  to [ short
-                    , i<=$i_{\mathrm{B}}(t)$
+                    , i<=$i_{\mathrm{B}}$
                     ]           ++ (1,0)        coordinate (x)
                  to [V]         (x|-gnd)
                  to [short,-o]  (gnd-|vbplus)   coordinate (vbminus)
@@ -24,7 +24,7 @@
                   to [short,-]      (x|-y)
                   to [short,-o]  ++ (1.4,0)     coordinate (vdplus)
                   to [ short
-                     , i<=$i_{\mathrm{D}}(t)$
+                     , i<=$i_{\mathrm{D}}$
                      ]           ++ (1,0)       coordinate (z)
                   to [V]         (z|-gnd)
                   to [short,-o]  (vdplus|-gnd)  coordinate (vdminus)
@@ -32,7 +32,7 @@
 
 \draw (mos.gate) to [short,-o]   ++ (-1,0)      coordinate (vgplus)
                  to [ short
-                    , i_<=$i_{\mathrm{G}}(t)$
+                    , i_<=$i_{\mathrm{G}}$
                     ]            ++ (-1,0)      coordinate (a)
                  to [V]          (a|-gnd)
                  to [short,-o]   (vgplus|-gnd)  coordinate (vgminus)
@@ -45,13 +45,13 @@
                       ]
 
 \path [voltarrow](vbplus) 
-  edge[] node [midway,left,inner sep=1pt] {$v_{\mathrm{B}}(t)$} (vbminus);
+  edge[] node [midway,left,inner sep=1pt] {$v_{\mathrm{B}}$} (vbminus);
 \path [voltarrow](vsplus) 
-  edge[] node [midway,right,inner sep=1pt] {$v_{\mathrm{S}}(t)$} (vsminus);
+  edge[] node [midway,right,inner sep=1pt] {$v_{\mathrm{S}}$} (vsminus);
 \path [voltarrow](vdplus) 
-  edge[] node [midway,left,inner sep=1pt] {$v_{\mathrm{D}}(t)$} (vdminus);    
+  edge[] node [midway,left,inner sep=1pt] {$v_{\mathrm{D}}$} (vdminus);    
 \path [voltarrow](vgplus) 
-  edge[] node [midway,right,inner sep=1pt] {$v_{\mathrm{G}}(t)$} (vgminus);   
+  edge[] node [midway,right,inner sep=1pt] {$v_{\mathrm{G}}$} (vgminus);   
 
 \tikzstyle{termstyle}=[font=\scriptsize\ttfamily,inner sep=1pt]
 

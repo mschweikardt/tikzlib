@@ -1,22 +1,22 @@
 \coordinate (gate) at (0,0);
 
 \draw (gate) to [short,o-*] ++ (2,0) coordinate (cgsp)
-             to [C,l=$C_{\mathrm{GS}}$ ] ++ (0,-2)  coordinate (cgsn)
+             to [C,l=$C_{\mathrm{gs}}$ ] ++ (0,-2)  coordinate (cgsn)
              to [short,*-o] (cgsn-|gate) coordinate (source1);
 
-\draw (cgsp) to [C,l=$C_{\mathrm{GD}}$ ] ++ (2,0) coordinate (gmp)
+\draw (cgsp) to [C,l=$C_{\mathrm{gd}}$ ] ++ (2,0) coordinate (gmp)
              to [ american controlled current source
                 , name=gm
-                , l=$g_{\mathrm{m}}\underline{V}_{\mathrm{GS}}$
+                , l=$g_{\mathrm{m}}v_{\mathrm{GS}}$
                 ] ++ (0,-2) coordinate (gmn)
                 to [short,-] (gmn-|cgsn);
 
 \draw (gmp) to [short,*-] ++ (2,0) coordinate (gdsp)
-            to [R,l=$g_{\mathrm{DS}}$ ] (gdsp|-gmn) coordinate (gdsn)
+            to [R,l=$g_{\mathrm{ds}}$ ] (gdsp|-gmn) coordinate (gdsn)
             to [short,-*] (gmn);
 
 \draw (gdsp) to [short,*-] ++ (1.5,0) coordinate (cdsp)
-             to [C,l=$C_{\mathrm{DS}}$ ] (cdsp|-gdsn) coordinate (cdsn)
+             to [C,l=$C_{\mathrm{ds}}$ ] (cdsp|-gdsn) coordinate (cdsn)
              to [short,-*] (gdsn);     
 
 \draw (cdsp) to [short,*-o] ++ (2.5,0) coordinate (drain);
@@ -31,11 +31,11 @@
 \coordinate (cdbp) at ($(cdsp)!0.5!(drain)$);
 
 \draw (cgbp) to[short,*-] (cgbp|-source1)
-            to [C,l=$C_{\mathrm{GB}}$,-*] (cgbp|-bulk1);
+            to [C,l=$C_{\mathrm{gb}}$,-*] (cgbp|-bulk1);
 \draw (cdbp) to[short,*-] (cdbp|-source2)
-            to [C,l=$C_{\mathrm{DB}}$,-*] (cdbp|-bulk2);
+            to [C,l=$C_{\mathrm{db}}$,-*] (cdbp|-bulk2);
 
-\draw (gmn) to [C,l=$C_{\mathrm{SB}}$,*-*] (gmn|-bulk2);
+\draw (gmn) to [C,l=$C_{\mathrm{sb}}$,*-*] (gmn|-bulk2);
 
 \node[anchor=east] at (gate) {G};                
 \node[anchor=east] at (source1) {S}; 
@@ -46,13 +46,13 @@
 
 \path [voltarrow] (gate) edge[] 
   node[midway,left,inner sep=1pt] 
-  {$\underline{V}_{\mathrm{GS}}$} (source1);
+  {$v_{\mathrm{gs}}$} (source1);
 \path [voltarrow] (bulk1) edge[] 
   node[midway,left,inner sep=1pt] 
-  {$\underline{V}_{\mathrm{BS}}$} (source1);
+  {$v_{\mathrm{bs}}$} (source1);
 \path [voltarrow] (bulk2) edge[] 
   node[midway,right,inner sep=1pt] 
-  {$\underline{V}_{\mathrm{BS}}$} (source2);
+  {$v_{\mathrm{bs}}$} (source2);
 \path [voltarrow] (drain) edge[] 
   node[midway,right,inner sep=1pt] 
-  {$\underline{V}_{\mathrm{DS}}$} (source2);
+  {$v_{\mathrm{ds}}$} (source2);
